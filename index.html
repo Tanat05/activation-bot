@@ -758,7 +758,7 @@
                         description: '신고 기능의 기본 설정을 변경합니다.<br><span class="arg required">누적수</span>는 신고가 누적되어 처벌이 적용되는 횟수를 설정합니다.<br><span class="arg required">처벌</span>은 누적된 신고에 대한 처벌을 설정합니다. (예: 타임아웃, 추방, 차단 등)'
                     },
                     {
-                        command: '/신고설정 제외역할 <span class="arg required">역할</span>',
+                        command: '/신고설정 제외 <span class="arg required">역할</span>',
                         description: '신고 기능에서 제외할 역할을 설정합니다.<br><span class="arg required">역할</span>은 신고 기능이 적용되지 않는 역할을 지정합니다.'
                     },
                     {
@@ -844,10 +844,6 @@
                     {
                         command: '/자동관리 제외 <span class="arg required">역할</span>',
                         description: '<span class="arg required">역할</span>을 가진 유저는 자동 관리 기능에서 제외합니다.<br>제외된 역할을 가진 유저는 자동 처벌 대상이 되지 않습니다.'
-                    },
-                    {
-                        command: '/자동관리 제외목록',
-                        description: '현재 자동 관리에서 제외된 역할 목록을 확인합니다.'
                     }
                 ]
             },
@@ -856,7 +852,7 @@
                 subtitle: "사용자 활동도 기반 레벨 시스템입니다.",
                 commands: [
                     {
-                        command: '/채팅레벨 자동세팅',
+                        command: '/채팅레벨 자동설정',
                         description: '채팅 레벨 시스템을 자동으로 설정합니다.<br>이 명령어를 실행하면 채팅 레벨 시스템이 활성화되고, 1~10 레벨의 역할이 자동으로 생성됩니다.'
                     },
                     {
