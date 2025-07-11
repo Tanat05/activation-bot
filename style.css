@@ -210,6 +210,78 @@ code {
     border-color: transparent transparent #333 transparent;
 }
 
+/* =================================== */
+/* === 모바일 반응형 스타일 (768px 이하) === */
+/* =================================== */
+@media (max-width: 768px) {
+
+    /* --- 기본 글꼴 및 여백 조정 --- */
+    body {
+        /* 모바일에서 기본 글꼴 크기를 약간 키워 가독성 확보 */
+        font-size: 16px; 
+    }
+    main {
+        /* 좌우 여백 줄이기 */
+        padding: 0 1rem; 
+        margin: 1.5rem auto;
+    }
+    .page-header h1 {
+        font-size: 2rem; /* 헤더 제목 크기 조정 */
+    }
+    .page-header p {
+        font-size: 1rem; /* 헤더 설명 크기 조정 */
+    }
+    .content-section h2 {
+        font-size: 1.5rem; /* 상세 페이지 제목 크기 조정 */
+    }
+
+
+    /* --- 메인 페이지 기능 버튼 목록을 1줄로 변경 --- */
+    .features-grid {
+        /* 그리드를 1열로 변경하여 버튼들이 세로로 쌓이도록 함 */
+        grid-template-columns: 1fr; 
+    }
+
+
+    /* --- 명령어 테이블 가로 스크롤 --- */
+    table {
+        /* 테이블이 화면 밖으로 나갈 경우 가로 스크롤 생성 */
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap; /* 테이블 내용이 줄바꿈되지 않도록 함 */
+    }
+
+    
+    /* --- 정보 팝오버를 화면 하단 팝업으로 변경 --- */
+    .info-popover {
+        /* 위치 기준을 화면 전체로 변경 */
+        position: fixed;
+        /* 화면 하단에 꽉 차게 배치 */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        
+        /* 크기 및 모양 조정 */
+        max-width: 100%;
+        border-radius: 12px 12px 0 0; /* 위쪽 모서리만 둥글게 */
+        border-bottom: none;
+
+        /* 나타나는 애니메이션 시작 위치 (화면 아래쪽 밖) */
+        transform: translateY(100%);
+    }
+
+    /* 팝오버가 보일 때의 스타일 */
+    .info-popover.visible {
+        /* 화면 아래쪽에서 위로 스르륵 올라오는 애니메이션 */
+        transform: translateY(0);
+    }
+    
+    /* 모바일에서는 팝오버 꼬리(화살표)가 필요 없으므로 숨김 */
+    .info-popover::after {
+        display: none;
+    }
+}
+
 /* 클릭 가능한 인수임을 알려주는 커서 모양 변경 */
 .arg[data-description] {
     cursor: help;
