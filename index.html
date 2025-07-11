@@ -296,25 +296,68 @@
             border-radius: 6px;
             font-size: 0.9rem;
             border: 1px solid var(--border-color);
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        
+        /* Command Card Layout for Mobile */
+        .command-card {
+            display: none;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+        
+        .command-card-header {
+            margin-bottom: 12px;
+        }
+        
+        .command-card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .command-card-code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: var(--background-color);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        
+        .command-card-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
         
         .arg {
             display: inline-block;
-            padding: 2px 8px;
-            margin: 0 2px;
+            padding: 4px 8px;
+            margin: 2px 2px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
+            white-space: nowrap;
         }
         
         .arg.required {
-            background: #ff6b6b;
+            background: #5865F2;
             color: white;
         }
         
         .arg.optional {
-            background: #51cf66;
-            color: white;
+            background: #E0E3FF;
+            color: black;
         }
         
         .legend {
@@ -464,28 +507,12 @@
     <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <div class="section-title">
-                <h2>주요 기능</h2>
-                <p>다양한 관리 및 엔터테인먼트 기능을 제공합니다</p>
-            </div>
 
             <div class="features-grid">
                 <a href="#" class="feature-card" data-feature="warning">
                     <span class="feature-icon">⚠️</span>
                     <h3 class="feature-title">경고 시스템</h3>
                     <p class="feature-description">서버 내 유저에게 경고를 부여하고 관리하는 기능</p>
-                </a>
-
-                <a href="#" class="feature-card" data-feature="announcement">
-                    <span class="feature-icon">📢</span>
-                    <h3 class="feature-title">공지 시스템</h3>
-                    <p class="feature-description">중요한 공지사항을 효과적으로 전달하는 기능</p>
-                </a>
-
-                <a href="#" class="feature-card" data-feature="emergency">
-                    <span class="feature-icon">🚨</span>
-                    <h3 class="feature-title">긴급신고</h3>
-                    <p class="feature-description">긴급 상황 신고 및 즉시 대응 시스템</p>
                 </a>
 
                 <a href="#" class="feature-card" data-feature="logging">
@@ -497,19 +524,19 @@
                 <a href="#" class="feature-card" data-feature="special-text">
                     <span class="feature-icon">✨</span>
                     <h3 class="feature-title">스페셜 텍스트</h3>
-                    <p class="feature-description">특별한 텍스트 효과와 서식 기능</p>
+                    <p class="feature-description">비밀 문구를 입력하면 역할 지급</p>
                 </a>
 
-                <a href="#" class="feature-card" data-feature="report">
-                    <span class="feature-icon">🚩</span>
-                    <h3 class="feature-title">신고 시스템</h3>
-                    <p class="feature-description">문제 상황을 신속하게 신고하는 기능</p>
+                <a href="#" class="feature-card" data-feature="emergency">
+                    <span class="feature-icon">🚨</span>
+                    <h3 class="feature-title">신고</h3>
+                    <p class="feature-description">문제 상황을 신속하게 신고하는 기능 및 즉시 대응 시스템</p>
                 </a>
 
                 <a href="#" class="feature-card" data-feature="role-management">
                     <span class="feature-icon">🏅</span>
                     <h3 class="feature-title">역할 지급</h3>
-                    <p class="feature-description">자동 역할 부여 및 관리 시스템</p>
+                    <p class="feature-description">역할 부여 버튼 생성</p>
                 </a>
 
                 <a href="#" class="feature-card" data-feature="emoji-ban">
@@ -553,6 +580,12 @@
                     <h3 class="feature-title">티켓 시스템</h3>
                     <p class="feature-description">개인 문의 및 지원 티켓 관리</p>
                 </a>
+
+                <a href="#" class="feature-card" data-feature="another-feature">
+                    <span class="feature-icon">🔧</span>
+                    <h3 class="feature-title">기타 기능</h3>
+                    <p class="feature-description">다양한 추가 기능 및 설정</p>
+                </a>
             </div>
         </div>
     </main>
@@ -587,15 +620,15 @@
                 commands: [
                     {
                         command: '/경고 부여 <span class="arg required">유저</span> <span class="arg optional">사유</span>',
-                        description: '선택한 유저에게 경고를 1회 부여합니다.<br>사유의 경우 처벌 로그채널이 설정되어있다면 로그에 사유가 같이 표기됩니다.'
+                        description: '<span class="arg required">유저</span>에게 경고를 1회 부여합니다.<br>사유의 경우 처벌 로그채널이 설정되어있다면 로그에 사유가 같이 표기됩니다.'
                     },
                     {
-                        command: '/경고 제거 <span class="arg required">유저</span>',
-                        description: '선택한 유저의 경고가 1회 제거됩니다.'
+                        command: '/경고 차감 <span class="arg required">유저</span> <span class="arg optional">개수</span>',
+                        description: '<span class="arg required">유저</span>의 경고가 <span class="arg optional">개수</span>개 차감됩니다.'
                     },
                     {
                         command: '/경고 자동제거 <span class="arg required">역할</span> <span class="arg required">경고수</span> <span class="arg required">시간</span>',
-                        description: '지정한 역할을 가진 유저의 경고를 설정한 시간마다 지정한 경고수만큼 차감합니다.'
+                        description: '<span class="arg required">역할</span>을 가진 유저의 경고를 설정한 <span class="arg required">시간</span>마다 지정한 <span class="arg required">경고수</span>만큼 차감합니다.'
                     },
                     {
                         command: '/경고 자동제거목록',
@@ -603,7 +636,7 @@
                     },
                     {
                         command: '/경고 자동제거해제 <span class="arg required">역할</span>',
-                        description: '지정한 역할에 설정된 경고 자동제거 기능을 해제합니다.'
+                        description: '<span class="arg required">역할</span>에 설정된 경고 자동제거 기능을 해제합니다.'
                     }
                 ],
                 setup: [
@@ -612,33 +645,169 @@
                     "경고가 부여되면 지정된 로그 채널에 자동으로 기록됩니다. (로그 기능 설정 필요)"
                 ]
             },
-            announcement: {
-                title: "📢 공지 시스템",
-                subtitle: "중요한 공지사항을 효과적으로 전달하는 기능입니다.",
+            logging: {
+                title: "📜 로그 관리",
+                subtitle: "서버 내 모든 활동을 체계적으로 기록합니다.",
                 commands: [
                     {
-                        command: '/공지 생성 <span class="arg required">제목</span> <span class="arg required">내용</span>',
-                        description: '새로운 공지사항을 생성합니다.'
+                        command: '/로그채널 생성',
+                        description: '서버의 로그를 기록할 채널을 자동으로 생성하고 설정합니다.'
                     },
                     {
-                        command: '/공지 수정 <span class="arg required">공지ID</span> <span class="arg optional">제목</span> <span class="arg optional">내용</span>',
-                        description: '기존 공지사항을 수정합니다.'
+                        command: '/로그채널 자동생성',
+                        description: '/로그 생성 명령어와 같은 기능입니다. 단, 로그 채널이 이미 존재하는 않은 로그만 생성합니다.'
                     },
                     {
-                        command: '/공지 삭제 <span class="arg required">공지ID</span>',
-                        description: '공지사항을 삭제합니다.'
+                        command: '/로그채널 채팅',
+                        description: '채팅 메시지 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 음성',
+                        description: '음성 채널 접속/퇴장 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 역할',
+                        description: '역할 변경 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 처벌',
+                        description: '처벌 기록과 경고 부여/차감 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 신고',
+                        description: '신고 접수 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 레벨업',
+                        description: '레벨업 기록을 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 부스트',
+                        description: '서버 부스트 기록을 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 닉네임',
+                        description: '닉네임 변경 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 환영 <span class="arg required">제목</span> <span class="arg required">내용</span> <span class="arg required">색상</span> <span class="arg optional">이미지</span>',
+                        description: '신규 유저 환영 메시지를 전송합니다.<br><span class="arg required">제목</span>과 <span class="arg required">내용</span>은 환영 메시지의 제목과 내용을 설정합니다.<br><span class="arg required">색상</span>은 환영 메시지의 배경 색상을 설정합니다. (16진수 색상 코드 사용)<br><span class="arg optional">이미지</span>는 환영 메시지에 표시할 이미지 URL을 설정합니다.'
+                    },
+                ],
+                setup: [
+                    "로그 기능은 채널 관리, 서버 관리 권한이 있으면 설정할 수 있습니다.",
+                    "설정된 채널에 서버 내 모든 활동이 자동으로 기록됩니다."
+                ]
+            },
+            "special-text": {
+                title: "✨ 스페셜 텍스트",
+                subtitle: "특별한 텍스트 효과와 서식 기능을 제공합니다.",
+                commands: [
+                    {
+                        command: '/스페셜텍스트 추가 <span class="arg required">문구</span> <span class="arg required">역할</span>',
+                        description: '<span class="arg required">문구</span>를 입력하면 <span class="arg required">역할</span>이 지급됩니다.<br>문구는 대소문자를 구분하지 않으며, 공백을 포함할 수 있습니다.'
+                    },
+                    {
+                        command: '/스페셜텍스트 제거 <span class="arg required">문구</span>',
+                        description: '<span class="arg required">문구</span>에 해당하는 스페셜 텍스트를 제거합니다.'
                     }
                 ],
                 setup: [
-                    "공지 채널을 먼저 설정해야 합니다.",
-                    "관리자 권한이 있는 유저만 공지를 작성할 수 있습니다.",
-                    "공지는 자동으로 핀 고정됩니다."
+                    "스페셜 텍스트 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "스페셜 텍스트를 입력하면 자동으로 역할이 지급되며, 해당 역할은 서버 내에서 특별한 권한을 부여할 수 있습니다."
                 ]
             },
-            // Add more features as needed...
+            emergency: {
+                title: "🚨 신고",
+                subtitle: "문제 상황을 신속하게 신고하는 기능 및 즉시 대응 시스템입니다.",
+                commands: [
+                    {
+                        command: '/신고 <span class="arg required">메세지</span>',
+                        description: '<span class="arg required">메세지</span>를 입력하여 신고합니다.<br>신고는 지정된 신고 채널에 자동으로 기록되며, 관리자에게 알림이 전송됩니다.<br>신고가 누적된 메세지는 자동으로 삭제됩니다.'
+                    },
+                    {
+                        command: '/유저신고 <span class="arg required">유저</span> <span class="arg required">사유</span> <span class="arg optional">증거</span>',
+                        description: '<span class="arg required">유저</span>를 <span class="arg required">사유</span>로 신고합니다.<br><span class="arg optional">증거</span>는 선택 사항이며, 파일을 첨부할 수 있습니다.<br>신고는 지정된 신고 채널에 자동으로 기록되며, 관리자에게 알림이 전송됩니다.'
+                    },
+                    {
+                        command: '/신고설정 기본 <span class="arg required">누적수</span> <span class="arg required">처벌</span>',
+                        description: '신고 기능의 기본 설정을 변경합니다.<br><span class="arg required">누적수</span>는 신고가 누적되어 처벌이 적용되는 횟수를 설정합니다.<br><span class="arg required">처벌</span>은 누적된 신고에 대한 처벌을 설정합니다. (예: 타임아웃, 추방, 차단 등)'
+                    },
+                    {
+                        command: '/신고설정 제외역할 <span class="arg required">역할</span>',
+                        description: '신고 기능에서 제외할 역할을 설정합니다.<br><span class="arg required">역할</span>은 신고 기능이 적용되지 않는 역할을 지정합니다.'
+                    },
+                    {
+                        command: '/신고설정 알림 <span class="arg required">역할</span>',
+                        description: '신고 발생 시 알림을 받을 역할을 설정합니다.<br><span class="arg required">역할</span>은 신고 발생 시 알림을 받을 역할을 지정합니다.'
+                    },
+                ],
+                setup: [
+                    "신고 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "추방, 차단 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "신고는 지정된 신고 채널에 자동으로 기록되며, 관리자에게 알림이 전송됩니다."
+                ]
+            },
+            "role-management": {
+                title: "🏅 역할 지급",
+                subtitle: "역할을 지급하는 버튼을 생성하고 관리하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/역할지급 <span class="arg required">채널</span> <span class="arg required">제목</span> <span class="arg required">내용</span> <span class="arg required">역할</span> <span class="arg required">버튼_이름</span> <span class="arg optional">색상</span>',
+                        description: '지정된 <span class="arg required">채널</span>에 역할 지급 버튼을 생성합니다.<br><span class="arg required">제목</span>과 <span class="arg required">내용</span>은 임베드의 제목과 내용을 설정합니다.<br><span class="arg required">역할</span>은 버튼 클릭 시 지급될 역할을 지정합니다.<br><span class="arg required">버튼_이름</span>은 버튼에 표시될 이름을 설정합니다.<br><span class="arg optional">색상</span>은 임베드의 색상을 설정합니다.'
+                    }
+                ],
+                setup: [
+                    "역할 지급 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "자동 역할 부여 기능은 서버 내 활동에 따라 자동으로 역할을 부여하는 기능입니다."
+                ]
+            },
+            "emoji-ban": {
+                title: "🚫 이모지 금지",
+                subtitle: "특정 이모지 사용을 제한하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/이모지 금지 <span class="arg required">이모지</span> <span class="arg required"처벌</span>',
+                        description: '<span class="arg required">이모지</span>를 금지 목록에 추가합니다.<br>추가된 이모지는 서버 내에서 사용할 수 없습니다.'
+                    },
+                    {
+                        command: '/이모지 금지해제 <span class="arg required">이모지</span>',
+                        description: '<span class="arg required">이모지</span>를 금지 목록에서 제거합니다.<br>제거된 이모지는 다시 사용할 수 있습니다.'
+                    },
+                ],
+                setup: [
+                    "이모지 금지 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "금지된 이모지를 사용하려는 경우, 봇이 자동으로 제거하고 처벌합니다."
+                ]
+            },
+            events: {
+                title: "🎉 이벤트 관리",
+                subtitle: "다양한 서버 이벤트를 쉽게 관리하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/이벤트 생성 <span class="arg required">시간</span> <span class="arg required">우승자</span> <span class="arg required">상품</span>',
+                        description: '이벤트를 생성합니다.<br><span class="arg required">시간</span>은 이벤트가 진행될 시간을 설정합니다.<br><span class="arg required">우승자</span>는 이벤트의 우승자 수를 설정합니다.<br><span class="arg required">상품</span>은 이벤트 우승자에게 지급될 상품을 설정합니다.'
+                    },
+                    {
+                        command: '/이벤트 삭제 <span class="arg required">상품</span>',
+                        description: '<span class="arg required">상품</span>에 해당하는 이벤트를 삭제합니다.<br>삭제된 이벤트는 복구할 수 없습니다.'
+                    },
+                    {
+                        command: '/이벤트 종료 <span class="arg required">상품</span>',
+                        description: '<span class="arg required">상품</span>에 해당하는 이벤트를 즉시 종료합니다.<br>종료된 이벤트는 더 이상 참여할 수 없습니다.'
+                    },
+                ],
+                setup: [
+                    "이벤트 관리 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "생성된 이벤트는 지정된 채널에 자동으로 공지됩니다."
+                ]
+            },
         };
 
-        // Modal functions
         function openModal(featureKey) {
             const feature = features[featureKey];
             if (!feature) return;
