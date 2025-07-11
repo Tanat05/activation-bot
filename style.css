@@ -172,3 +172,45 @@ code {
 .back-button:hover {
     background-color: var(--dark-blue);
 }
+
+/* === 정보 팝오버 스타일 === */
+.info-popover {
+    position: absolute; /* 다른 요소 위에 띄우기 위함 */
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 250px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* 팝오버가 보일 때의 스타일 */
+.info-popover.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 팝오버의 꼬리 부분 (화살표) */
+.info-popover::after {
+    content: '';
+    position: absolute;
+    bottom: 100%; /* 팝오버의 위쪽에 위치 */
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+}
+
+/* 클릭 가능한 인수임을 알려주는 커서 모양 변경 */
+.arg[data-description] {
+    cursor: help;
+}
