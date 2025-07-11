@@ -1,59 +1,49 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기능 안내: 경고</title>
-    <link rel="stylesheet" href="../style.css"> <!-- 상위 폴더의 CSS 파일을 연결 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="page-header">
-        <h1>⚠️ 경고 기능</h1>
-        <p>서버 내 유저에게 경고를 부여하고 관리하는 기능입니다.</p>
-    </header>
+<main>
+    <div class="content-section">
+        <h2>명령어</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>명령어</th>
+                    <th>설명</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>!경고 <span class="arg required">[유저]</span> <span class="arg optional">[사유]</span></code>
+                    </td>
+                    <td>멘션한 유저에게 경고를 1회 부여합니다.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>!경고확인 <span class="arg required">[유저]</span></code>
+                    </td>
+                    <td>멘션한 유저의 현재 경고 횟수를 확인합니다.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>!경고차감 <span class="arg required">[유저]</span></code>
+                    </td>
+                    <td>멘션한 유저의 경고를 1회 차감합니다.</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <main>
-        <div class="content-section">
-            <h2>명령어</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>명령어</th>
-                        <th>설명</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>!경고 [유저] [사유]</code></td>
-                        <td>멘션한 유저에게 경고를 1회 부여합니다.</td>
-                    </tr>
-                    <tr>
-                        <td><code>!경고확인 [유저]</code></td>
-                        <td>멘션한 유저의 현재 경고 횟수를 확인합니다.</td>
-                    </tr>
-                    <tr>
-                        <td><code>!경고차감 [유저]</code></td>
-                        <td>멘션한 유저의 경고를 1회 차감합니다.</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2>설정 방법</h2>
-            <ol>
-                <li>경고 기능은 별도의 설정 없이 바로 사용할 수 있습니다.</li>
-                <li>관리자 권한이 있는 유저만 명령어를 사용할 수 있습니다.</li>
-                <li>경고가 부여되면 지정된 로그 채널에 자동으로 기록됩니다. (로그 기능 설정 필요)</li>
-            </ol>
+        <!-- 범례 추가 -->
+        <div class="legend">
+            <strong>명령어 표기법:</strong>
+            <span class="arg required">[필수 항목]</span>
+            <span class="arg optional">[선택 항목]</span>
         </div>
 
-        <a href="../index.html" class="back-button">🏠 첫 화면으로 돌아가기</a>
-    </main>
+        <h2>설정 방법</h2>
+        <ol>
+            <li>경고 기능은 별도의 설정 없이 바로 사용할 수 있습니다.</li>
+            <li>관리자 권한이 있는 유저만 명령어를 사용할 수 있습니다.</li>
+            <li>경고가 부여되면 지정된 로그 채널에 자동으로 기록됩니다. (로그 기능 설정 필요)</li>
+        </ol>
+    </div>
 
-    <footer>
-        <p>© 2024 디스코드 활성화. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    <a href="../index.html" class="back-button">🏠 첫 화면으로 돌아가기</a>
+</main>
