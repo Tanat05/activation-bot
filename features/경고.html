@@ -9,46 +9,59 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<table>
-    <thead>
-        <tr>
-            <th>명령어</th>
-            <th>설명</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <code>!경고
-                    <span class="arg required" data-description="경고를 부여할 유저를 멘션(@)하거나 ID를 입력해주세요.">[유저]</span>
-                    <span class="arg optional" data-description="128글자 이내로 경고 사유를 작성할 수 있습니다.">[사유]</span>
-                </code>
-            </td>
-            <td>멘션한 유저에게 경고를 1회 부여합니다.</td>
-        </tr>
-        <tr>
-            <td>
-                <code>!경고확인
-                    <span class="arg required" data-description="경고 횟수를 확인할 유저를 멘션해주세요.">[유저]</span>
-                </code>
-            </td>
-            <td>멘션한 유저의 현재 경고 횟수를 확인합니다.</td>
-        </tr>
-        <tr>
-            <td>
-                <code>!경고차감
-                    <span class="arg required" data-description="경고를 차감할 유저를 멘션해주세요.">[유저]</span>
-                    <span class="arg optional" data-description="차감할 경고 횟수를 숫자로 입력합니다. (기본: 1)">[횟수]</span>
-                </code>
-            </td>
-            <td>멘션한 유저의 경고를 차감합니다.</td>
-        </tr>
-    </tbody>
-</table>
+<main>
+    <div class="content-section">
+        <h2>명령어</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>명령어</th>
+                    <th>설명</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>!경고
+                            <span class="arg required" data-description="경고를 부여할 유저를 멘션(@)하거나 ID를 입력해주세요.">[유저]</span>
+                            <span class="arg optional" data-description="128글자 이내로 경고 사유를 작성할 수 있습니다.">[사유]</span>
+                        </code>
+                    </td>
+                    <td>멘션한 유저에게 경고를 1회 부여합니다.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>!경고확인
+                            <span class="arg required" data-description="경고 횟수를 확인할 유저를 멘션해주세요.">[유저]</span>
+                        </code>
+                    </td>
+                    <td>멘션한 유저의 현재 경고 횟수를 확인합니다.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>!경고차감
+                            <span class="arg required" data-description="경고를 차감할 유저를 멘션해주세요.">[유저]</span>
+                            <span class="arg optional" data-description="차감할 경고 횟수를 숫자로 입력합니다. (기본: 1)">[횟수]</span>
+                        </code>
+                    </td>
+                    <td>멘션한 유저의 경고를 차감합니다.</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="legend">
+            <strong>명령어 표기법:</strong>
+            <span class="arg required">[필수 항목]</span>
+            <span class="arg optional">[선택 항목]</span>
+        </div>
 
-<!-- 범례는 그대로 둡니다 -->
-<div class="legend">
-    <strong>명령어 표기법:</strong>
-    <span class="arg required">[필수 항목]</span>
-    <span class="arg optional">[선택 항목]</span>
-</div>
+        <h2>설정 방법</h2>
+        <ol>
+            <li>경고 기능은 별도의 설정 없이 바로 사용할 수 있습니다.</li>
+            <li>관리자 권한이 있는 유저만 명령어를 사용할 수 있습니다.</li>
+            <li>경고가 부여되면 지정된 로그 채널에 자동으로 기록됩니다. (로그 기능 설정 필요)</li>
+        </ol>
+    </div>
+
+    <a href="../index.html" class="back-button">🏠 첫 화면으로 돌아가기</a>
+</main>
