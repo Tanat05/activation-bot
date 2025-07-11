@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기능 안내: 긴급신고</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<main>
+    <div class="content-section">
+        <h2>명령어</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>명령어</th>
+                    <th>설명</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>/긴급 신고
+                            <span class="arg optional" data-description="메세지의 ID">채팅</span>
+                        </code>
+                    </td>
+                    <td><span class="arg optional" data-description="메세지의 ID">채팅</span>를 신고합니다.<br>설정에 따라 여러번 신고를 받은 채팅은 자동으로 삭제가 됩니다.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>/긴급신고 누적수
+                            <span class="arg required" data-description="2에서 10까지의 정수">횟수</span>
+                        </code>
+                    </td>
+                    <td><span class="arg required" data-description="2에서 10까지의 정수">횟수</span>회 신고 받은 채팅은 바로 삭제됩니다.<br>/긴급신고 제재가 설정되어있다면 삭제외의 처벌이 적용됩니다.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>/긴급신고 제외역할
+                            <span class="arg required" data-description="역할 멘션 또는 ID">역할</span>
+                        </code>
+                    </td>
+                    <td><span class="arg required" data-description="유저 멘션 또는 ID">역할</span>를 가진 유저의 채팅은 긴급신고의 영향을 받지 않습니다.<br>공지와 같은 관리자의 메세지가 삭제되는 것을 방지하기 위한 기능입니다.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>/긴급신고 제재
+                          <span class="arg required" data-description="타임아웃 1분 ~ 1시간, 추방, 차단">제재</span>
+                        </code>
+                    </td>
+                    <td>긴급신고로 메세지가 삭제될 때 추가로 적용될 <span class="arg required" data-description="타임아웃 1분 ~ 1시간, 추방, 차단">제재</span>를 설정합니다.</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="legend">
+            <strong>명령어 표기법:</strong>
+            <span class="arg required">[필수 항목]</span>
+            <span class="arg optional">[선택 항목]</span>
+        </div>
+
+        <h2>설정 방법</h2>
+        <ol>
+            <li>긴급신고 기능은 별도의 설정없이 바로 사용이 가능합니다</li>
+            <li>유저 차단, 유저 추방, 역할 관리 권한이 있는 모든 유저가 사용이 가능합니다.</li>
+            <li>경고가 부여되면 지정된 로그 채널에 자동으로 기록됩니다. (로그 기능 설정 필요)</li>
+        </ol>
+    </div>
+
+    <a href="../index.html" class="back-button">🏠 첫 화면으로 돌아가기</a>
+
+    <footer>
+        <p>© 2024 디스코드 활성화. All rights reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+</main>
