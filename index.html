@@ -4,63 +4,739 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>디스코드 활성화 봇 기능 안내서</title>
-
-    <!-- ▼▼▼▼▼ 미리보기 임베드용 메타 태그 (제공된 URL 적용) ▼▼▼▼▼ -->
+    
+    <!-- Meta tags for social sharing -->
     <meta property="og:title" content="디스코드 활성화 봇 기능 안내서">
     <meta property="og:description" content="서버를 더욱 편리하고 즐겁게 만드는 모든 기능들을 만나보세요.">
     <meta property="og:type" content="website">
-    <!-- 중요: 아래 이미지 경로는 /images/embed-preview.png 파일을 저장소에 업로드해야 정상적으로 보입니다. -->
     <meta property="og:image" content="https://tanat05.github.io/activation-bot/images/embed-preview.png">
     <meta property="og:url" content="https://tanat05.github.io/activation-bot/">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="디스코드 활성화 봇 기능 안내서">
-    <meta name="twitter:description" content="서버를 더욱 편리하고 즐겁게 만드는 모든 기능들을 만나보세요.">
-    <meta name="twitter:image" content="https://tanat05.github.io/activation-bot/images/embed-preview.png">
-    <!-- ▲▲▲▲▲ 여기까지 ▲▲▲▲▲ -->
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #5865f2;
+            --primary-hover: #4752c4;
+            --secondary-color: #4f545c;
+            --background-color: #ffffff;
+            --surface-color: #f8f9fa;
+            --text-primary: #2c2f33;
+            --text-secondary: #747f8d;
+            --text-muted: #99aab5;
+            --border-color: #e3e5e8;
+            --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --border-radius: 12px;
+            --border-radius-large: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .main {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius-large);
+            padding: 32px 24px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .feature-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        /* Feature Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--background-color);
+            border-radius: var(--border-radius-large);
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .modal-header {
+            padding: 32px 32px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .modal-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .modal-body {
+            padding: 32px;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: var(--transition);
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .close-button:hover {
+            color: var(--text-primary);
+            background: var(--surface-color);
+        }
+        
+        /* Command Table */
+        .command-section {
+            margin-bottom: 40px;
+        }
+        
+        .command-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .command-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .command-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+        
+        .command-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .command-code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: var(--background-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .arg {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 0 2px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .arg.required {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .arg.optional {
+            background: #51cf66;
+            color: white;
+        }
+        
+        .legend {
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+        }
+        
+        /* Setup Instructions */
+        .setup-section {
+            margin-bottom: 40px;
+        }
+        
+        .setup-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
+        .setup-steps {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+        }
+        
+        .setup-steps ol {
+            padding-left: 20px;
+        }
+        
+        .setup-steps li {
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--surface-color);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer p {
+            color: var(--text-muted);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 0;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .main {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .feature-card {
+                padding: 24px 20px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 24px 20px;
+            }
+            
+            .command-table {
+                font-size: 0.9rem;
+            }
+            
+            .command-table th,
+            .command-table td {
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 20px 16px;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 20px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    
-    <!-- 전체 레이아웃을 감싸는 컨테이너 -->
-    <div class="main-container">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>디스코드 활성화 봇</h1>
+                <p>서버를 더욱 편리하고 즐겁게 만드는 모든 기능들을 만나보세요</p>
+            </div>
+        </div>
+    </header>
 
-        <!-- 페이지 상단 헤더 -->
-        <header class="site-header">
-            <h1>디스코드 활성화 봇</h1>
-            <p>서버를 더욱 편리하고 즐겁게 만드는 모든 기능들을 만나보세요.</p>
-        </header>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="section-title">
+                <h2>주요 기능</h2>
+                <p>다양한 관리 및 엔터테인먼트 기능을 제공합니다</p>
+            </div>
 
-        <!-- 기능 목록을 담는 메인 그리드 -->
-        <main class="features-grid">
-            <a href="./features/경고.html" class="neumorphic-card">⚠️ 경고</a>
-            <a href="./features/공지.html" class="neumorphic-card">📢 공지</a>
-            <a href="./features/긴급신고.html" class="neumorphic-card">🚨 긴급신고</a>
-            <a href="./features/로그.html" class="neumorphic-card">📜 로그</a>
-            <a href="./features/스페셜텍스트.html" class="neumorphic-card">✨ 스페셜텍스트</a>
-            <a href="./features/신고.html" class="neumorphic-card">🚩 신고</a>
-            <a href="./features/역할지급.html" class="neumorphic-card">🏅 역할지급</a>
-            <a href="./features/이모지-금지.html" class="neumorphic-card">🚫 이모지 금지</a>
-            <a href="./features/이벤트.html" class="neumorphic-card">🎉 이벤트</a>
-            <a href="./features/자동관리.html" class="neumorphic-card">🤖 자동관리</a>
-            <a href="./features/채팅레벨.html" class="neumorphic-card">📈 채팅레벨</a>
-            <a href="./features/출석.html" class="neumorphic-card">✅ 출석</a>
-            <a href="./features/카운트채널.html" class="neumorphic-card">🔢 카운트채널</a>
-            <a href="./features/티켓.html" class="neumorphic-card">🎫 티켓</a>
-        </main>
+            <div class="features-grid">
+                <a href="#" class="feature-card" data-feature="warning">
+                    <span class="feature-icon">⚠️</span>
+                    <h3 class="feature-title">경고 시스템</h3>
+                    <p class="feature-description">서버 내 유저에게 경고를 부여하고 관리하는 기능</p>
+                </a>
 
-        <!-- 저작권 푸터 -->
-        <footer class="site-footer">
-            <p>© 2025 디스코드 활성화 & 타나트. All rights reserved.</p>
-        </footer>
+                <a href="#" class="feature-card" data-feature="announcement">
+                    <span class="feature-icon">📢</span>
+                    <h3 class="feature-title">공지 시스템</h3>
+                    <p class="feature-description">중요한 공지사항을 효과적으로 전달하는 기능</p>
+                </a>
 
+                <a href="#" class="feature-card" data-feature="emergency">
+                    <span class="feature-icon">🚨</span>
+                    <h3 class="feature-title">긴급신고</h3>
+                    <p class="feature-description">긴급 상황 신고 및 즉시 대응 시스템</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="logging">
+                    <span class="feature-icon">📜</span>
+                    <h3 class="feature-title">로그 관리</h3>
+                    <p class="feature-description">서버 내 모든 활동을 체계적으로 기록</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="special-text">
+                    <span class="feature-icon">✨</span>
+                    <h3 class="feature-title">스페셜 텍스트</h3>
+                    <p class="feature-description">특별한 텍스트 효과와 서식 기능</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="report">
+                    <span class="feature-icon">🚩</span>
+                    <h3 class="feature-title">신고 시스템</h3>
+                    <p class="feature-description">문제 상황을 신속하게 신고하는 기능</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="role-management">
+                    <span class="feature-icon">🏅</span>
+                    <h3 class="feature-title">역할 지급</h3>
+                    <p class="feature-description">자동 역할 부여 및 관리 시스템</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="emoji-ban">
+                    <span class="feature-icon">🚫</span>
+                    <h3 class="feature-title">이모지 금지</h3>
+                    <p class="feature-description">특정 이모지 사용을 제한하는 기능</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="events">
+                    <span class="feature-icon">🎉</span>
+                    <h3 class="feature-title">이벤트 관리</h3>
+                    <p class="feature-description">다양한 서버 이벤트를 쉽게 관리</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="auto-management">
+                    <span class="feature-icon">🤖</span>
+                    <h3 class="feature-title">자동 관리</h3>
+                    <p class="feature-description">서버를 자동으로 관리하는 스마트 기능</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="chat-level">
+                    <span class="feature-icon">📈</span>
+                    <h3 class="feature-title">채팅 레벨</h3>
+                    <p class="feature-description">사용자 활동도 기반 레벨 시스템</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="attendance">
+                    <span class="feature-icon">✅</span>
+                    <h3 class="feature-title">출석 체크</h3>
+                    <p class="feature-description">일일 출석 체크 및 보상 시스템</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="count-channel">
+                    <span class="feature-icon">🔢</span>
+                    <h3 class="feature-title">카운트 채널</h3>
+                    <p class="feature-description">숫자 세기 게임 및 통계 채널</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="ticket">
+                    <span class="feature-icon">🎫</span>
+                    <h3 class="feature-title">티켓 시스템</h3>
+                    <p class="feature-description">개인 문의 및 지원 티켓 관리</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Feature Details -->
+    <div class="modal" id="featureModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-subtitle" id="modalSubtitle"></p>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
     </div>
 
-    <!-- 스크립트 파일 연결 -->
-    <script src="script.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 디스코드 활성화 봇 & 타나트. All rights reserved.</p>
+        </div>
+    </footer>
 
+    <script>
+        // Feature data
+        const features = {
+            warning: {
+                title: "⚠️ 경고 시스템",
+                subtitle: "서버 내 유저에게 경고를 부여하고 관리하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/경고 부여 <span class="arg required">유저</span> <span class="arg optional">사유</span>',
+                        description: '선택한 유저에게 경고를 1회 부여합니다.<br>사유의 경우 처벌 로그채널이 설정되어있다면 로그에 사유가 같이 표기됩니다.'
+                    },
+                    {
+                        command: '/경고 제거 <span class="arg required">유저</span>',
+                        description: '선택한 유저의 경고가 1회 제거됩니다.'
+                    },
+                    {
+                        command: '/경고 자동제거 <span class="arg required">역할</span> <span class="arg required">경고수</span> <span class="arg required">시간</span>',
+                        description: '지정한 역할을 가진 유저의 경고를 설정한 시간마다 지정한 경고수만큼 차감합니다.'
+                    },
+                    {
+                        command: '/경고 자동제거목록',
+                        description: '현재 설정된 경고 자동제거의 목록을 확인합니다.'
+                    },
+                    {
+                        command: '/경고 자동제거해제 <span class="arg required">역할</span>',
+                        description: '지정한 역할에 설정된 경고 자동제거 기능을 해제합니다.'
+                    }
+                ],
+                setup: [
+                    "경고 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "유저 차단, 유저 추방, 역할 관리 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "경고가 부여되면 지정된 로그 채널에 자동으로 기록됩니다. (로그 기능 설정 필요)"
+                ]
+            },
+            announcement: {
+                title: "📢 공지 시스템",
+                subtitle: "중요한 공지사항을 효과적으로 전달하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/공지 생성 <span class="arg required">제목</span> <span class="arg required">내용</span>',
+                        description: '새로운 공지사항을 생성합니다.'
+                    },
+                    {
+                        command: '/공지 수정 <span class="arg required">공지ID</span> <span class="arg optional">제목</span> <span class="arg optional">내용</span>',
+                        description: '기존 공지사항을 수정합니다.'
+                    },
+                    {
+                        command: '/공지 삭제 <span class="arg required">공지ID</span>',
+                        description: '공지사항을 삭제합니다.'
+                    }
+                ],
+                setup: [
+                    "공지 채널을 먼저 설정해야 합니다.",
+                    "관리자 권한이 있는 유저만 공지를 작성할 수 있습니다.",
+                    "공지는 자동으로 핀 고정됩니다."
+                ]
+            },
+            // Add more features as needed...
+        };
+
+        // Modal functions
+        function openModal(featureKey) {
+            const feature = features[featureKey];
+            if (!feature) return;
+
+            document.getElementById('modalTitle').textContent = feature.title;
+            document.getElementById('modalSubtitle').textContent = feature.subtitle;
+            
+            let modalContent = '';
+            
+            // Commands section
+            if (feature.commands && feature.commands.length > 0) {
+                modalContent += `
+                    <div class="command-section">
+                        <h3>명령어</h3>
+                        <table class="command-table">
+                            <thead>
+                                <tr>
+                                    <th>명령어</th>
+                                    <th>설명</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                feature.commands.forEach(cmd => {
+                    modalContent += `
+                        <tr>
+                            <td><div class="command-code">${cmd.command}</div></td>
+                            <td>${cmd.description}</td>
+                        </tr>
+                    `;
+                });
+                
+                modalContent += `
+                            </tbody>
+                        </table>
+                        <div class="legend">
+                            <strong>명령어 표기법:</strong>
+                            <span class="arg required">필수 항목</span>
+                            <span class="arg optional">선택 항목</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Setup section
+            if (feature.setup && feature.setup.length > 0) {
+                modalContent += `
+                    <div class="setup-section">
+                        <h3>설정 방법</h3>
+                        <div class="setup-steps">
+                            <ol>
+                `;
+                
+                feature.setup.forEach(step => {
+                    modalContent += `<li>${step}</li>`;
+                });
+                
+                modalContent += `
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('modalBody').innerHTML = modalContent;
+            document.getElementById('featureModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('featureModal').classList.remove('active');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Feature card click handlers
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const featureKey = this.dataset.feature;
+                    openModal(featureKey);
+                });
+            });
+
+            // Modal close on outside click
+            document.getElementById('featureModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Close modal on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
