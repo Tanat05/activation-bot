@@ -1,27 +1,20 @@
 /* =================================== */
-/* ===    다크 오로라 테마 (2024)     === */
+/* ===      뉴모피즘 테마 (2024)      === */
 /* =================================== */
 
 /* --- 기본 설정 및 글꼴 --- */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
 :root {
-    /* 색상 변수: 다크 오로라 컨셉 */
-    --dark-bg-1: #0d1a26; /* 심연의 파랑 */
-    --dark-bg-2: #1d2a3d; /* 어두운 슬레이트 */
-    --aurora-1: #3a2d5c; /* 오로라 보라 */
-    --aurora-2: #1d425b; /* 오로라 틸 */
+    /* 뉴모피즘 색상 변수 (제공된 이미지 기반) */
+    --primary-bg: #ECF0F3;
+    --light-shadow-color: #FFFFFF;
+    --dark-shadow-color: #D1D9E6;
 
-    /* 텍스트 색상 변수: 가독성 확보 */
-    --text-primary: #e0e5f0; /* 기본 밝은 텍스트 (완전한 흰색보다 눈이 편함) */
-    --text-bright: #ffffff;   /* 제목 등 강조용 밝은 텍스트 */
-    --text-muted: #a0aec0;   /* 부가 설명용 텍스트 */
-
-    /* 글래스 패널 색상 변수 */
-    --glass-bg: rgba(29, 42, 61, 0.4); /* 어두운 반투명 배경 */
-    --glass-border: rgba(128, 158, 204, 0.2); /* 은은한 테두리 */
-    --glass-highlight: rgba(128, 158, 204, 0.1); /* 호버 시 하이라이트 */
-    --shadow-color: rgba(0, 0, 0, 0.3);
+    /* 텍스트 및 액센트 색상 */
+    --text-dark: #444a5f;
+    --text-muted: #8a91a8;
+    --accent-color: #3d8aff; /* 포인트 색상 */
 }
 
 * {
@@ -30,19 +23,11 @@
     padding: 0;
 }
 
-/* --- 동적 오로라 배경 --- */
-@keyframes gradient-animation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    color: var(--text-primary); /* 기본 텍스트 색상을 밝게 변경 */
-    background: linear-gradient(-45deg, var(--dark-bg-1), var(--dark-bg-2), var(--aurora-1), var(--aurora-2));
-    background-size: 400% 400%;
-    animation: gradient-animation 25s ease infinite;
+    color: var(--text-muted);
+    background-color: var(--primary-bg);
+    line-height: 1.7;
     min-height: 100vh;
 }
 
@@ -55,123 +40,110 @@ body {
 
 .site-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
 .site-header h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 900;
-    color: var(--text-bright);
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    color: var(--text-dark);
 }
 
 .site-header p {
-    font-size: 1.2rem;
-    color: var(--text-muted);
+    font-size: 1.1rem;
     margin-top: 0.5rem;
 }
 
-/* --- 다크 글래스 패널 (핵심 스타일) --- */
-.glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px 0 var(--shadow-color);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* --- 메인 기능 버튼 그리드 --- */
+/* --- 뉴모피즘 버튼 (메인 페이지) --- */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
-.features-grid .glass-panel {
+.neumorphic-button {
+    background-color: var(--primary-bg);
+    border-radius: 20px;
     padding: 2rem;
     text-decoration: none;
-    color: var(--text-primary);
-    font-size: 1.2rem;
+    color: var(--text-dark);
+    font-size: 1.1rem;
     font-weight: 700;
     text-align: center;
+    /* 튀어나온 효과 (Extruded) */
+    box-shadow: 10px 10px 20px var(--dark-shadow-color), 
+                -10px -10px 20px var(--light-shadow-color);
+    transition: all 0.2s ease-in-out;
 }
 
-.features-grid .glass-panel:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 16px 40px 0 var(--shadow-color);
-    background: var(--glass-highlight);
-    border-color: rgba(128, 158, 204, 0.4);
+.neumorphic-button:hover {
+    color: var(--accent-color);
+    /* 눌린 효과 (Pressed) */
+    box-shadow: inset 8px 8px 16px var(--dark-shadow-color),
+                inset -8px -8px 16px var(--light-shadow-color);
 }
 
-/* --- 상세 페이지 콘텐츠 --- */
-.content-wrapper {
+/* --- 상세 페이지 콘텐츠 패널 (안으로 파인 효과) --- */
+.neumorphic-panel--inset {
+    background-color: var(--primary-bg);
+    border-radius: 20px;
     padding: 2.5rem;
-    color: var(--text-primary); /* 상세 페이지 내부 텍스트도 밝게 */
+    /* 기본 상태가 안으로 파인 효과 */
+    box-shadow: inset 8px 8px 16px var(--dark-shadow-color),
+                inset -8px -8px 16px var(--light-shadow-color);
 }
 
 .content-wrapper h2 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--text-bright); /* 제목은 더 밝게 */
-    border-bottom: 3px solid var(--glass-border);
+    color: var(--text-dark);
+    border-bottom: 2px solid var(--dark-shadow-color);
     padding-bottom: 0.8rem;
     margin-bottom: 1.5rem;
     margin-top: 2rem;
 }
-.content-wrapper h2:first-child {
-    margin-top: 0;
-}
+.content-wrapper h2:first-child { margin-top: 0; }
 
 table {
     width: 100%;
     border-collapse: collapse;
 }
-thead th {
-    background: rgba(128, 158, 204, 0.1);
-    padding: 1rem;
-    text-align: left;
-    font-weight: 700;
-    color: var(--text-bright);
-}
-tbody td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--glass-border);
-    vertical-align: middle;
-}
+thead th { padding: 1rem; text-align: left; font-weight: 700; color: var(--text-dark); }
+tbody td { padding: 1rem; border-top: 1px solid var(--dark-shadow-color); vertical-align: middle; }
 
 /* --- 명령어 인수 & 팝오버 --- */
 code { font-family: 'D2Coding', 'Courier New', monospace; }
 
 .arg {
-    padding: 0.3em 0.7em; margin: 0 0.2em; border-radius: 7px;
+    padding: 0.4em 0.8em; margin: 0 0.2em; border-radius: 10px;
     font-size: 0.9em; font-weight: bold; vertical-align: middle;
+    transition: all 0.2s ease-in-out;
 }
 .arg.required {
-    background-color: #82a5ff; /* 밝은 파랑으로 가독성 확보 */
-    color: #0d1a26;
+    color: var(--accent-color);
+    box-shadow: inset 3px 3px 6px var(--dark-shadow-color),
+                inset -3px -3px 6px var(--light-shadow-color);
 }
 .arg.optional {
-    background-color: transparent;
     color: var(--text-muted);
-    border: 1px dashed var(--text-muted);
+    box-shadow: 3px 3px 6px var(--dark-shadow-color),
+                -3px -3px 6px var(--light-shadow-color);
 }
 .arg[data-description] { cursor: help; }
 
-.legend { margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); }
+.legend { margin-top: 1rem; font-size: 0.9rem; }
+.legend .arg { font-size: 0.8em; } /* 범례 안의 태그는 조금 더 작게 */
 
 .info-popover {
-    /* 팝오버도 다크 글래스모피즘 적용 */
     position: absolute; z-index: 100;
     padding: 12px 16px; font-size: 0.95rem; line-height: 1.5;
-    max-width: 250px;
-    color: var(--text-primary);
-    background: rgba(44, 62, 80, 0.8);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(128, 158, 204, 0.5);
+    max-width: 250px; color: var(--text-dark);
+    /* 팝오버도 뉴모피즘 적용 */
+    background: var(--primary-bg);
     border-radius: 12px;
-    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    box-shadow: 8px 8px 16px var(--dark-shadow-color), 
+                -8px -8px 16px var(--light-shadow-color);
+    /* 기본 숨김 & 애니메이션 */
     opacity: 0; visibility: hidden;
     transform: translateY(10px);
     transition: opacity 0.2s ease, transform 0.2s ease;
@@ -182,36 +154,24 @@ code { font-family: 'D2Coding', 'Courier New', monospace; }
 .back-button {
     display: inline-block; margin-top: 2rem;
     padding: 12px 24px; text-decoration: none;
-    font-weight: 700; color: var(--text-bright);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    font-weight: 700; color: var(--text-muted);
 }
-.back-button:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+.back-button:hover { color: var(--accent-color); }
 
-/* --- 모바일 반응형 & 글자 잘림 문제 해결 --- */
+
+/* --- 모바일 반응형 --- */
 @media (max-width: 768px) {
     .main-container { padding: 2rem 1rem; }
-    .site-header h1 { font-size: 2.5rem; }
+    .site-header h1 { font-size: 2.2rem; }
     .site-header p { font-size: 1rem; }
-    .features-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .content-wrapper { padding: 1.5rem; }
-
-    /* ▼▼▼ 글자 잘림 문제 해결 ▼▼▼ */
-    table {
-        display: block; /* 테이블을 블록 요소로 만들어 스크롤 적용 */
-        overflow-x: auto; /* 내용이 넘칠 경우 가로 스크롤 생성 */
-    }
-    tbody td {
-        white-space: normal; /* 셀 안의 텍스트는 정상적으로 줄바꿈되도록 설정 */
-        min-width: 150px; /* 너무 좁아지지 않도록 최소 너비 지정 */
-    }
-    /* ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+    
+    .features-grid { gap: 1.5rem; }
+    .neumorphic-panel--inset { padding: 1.5rem; }
+    table { display: block; overflow-x: auto; white-space: nowrap; }
 
     .info-popover {
-        position: fixed; bottom: 0; left: 0; right: 0;
-        max-width: 100%; border-radius: 16px 16px 0 0;
+        position: fixed; bottom: 1rem; left: 1rem; right: 1rem;
+        max-width: calc(100% - 2rem);
         transform: translateY(100%);
     }
     .info-popover.visible { transform: translateY(0); }
