@@ -1,0 +1,134 @@
+/* === 기본 설정 === */
+:root {
+    --light-blue: #a0d5f5; /* 캐릭터 배경 하늘색 */
+    --dark-blue: #4a7a9e;  /* 비니 파란색 */
+    --pink-accent: #f7c5d0; /* 볼터치 분홍색 */
+    --text-color: #333;
+    --header-text-color: #2c5d80;
+    --light-gray: #f4f4f4;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    background-color: #fcfdff;
+    color: var(--text-color);
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* === 헤더 & 푸터 === */
+.page-header {
+    background-color: var(--light-blue);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 5px solid var(--dark-blue);
+}
+
+.page-header h1 {
+    margin: 0;
+    color: var(--header-text-color);
+    font-size: 2.5rem;
+}
+
+.page-header p {
+    margin: 0.5rem 0 0;
+    color: var(--header-text-color);
+    opacity: 0.9;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* === 메인 페이지 기능 버튼 그리드 === */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.feature-button {
+    background-color: #fff;
+    color: var(--dark-blue);
+    border: 2px solid var(--light-blue);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.feature-button:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
+    border-color: var(--dark-blue);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+/* === 상세 페이지 콘텐츠 === */
+.content-section h2 {
+    color: var(--dark-blue);
+    border-bottom: 3px solid var(--light-blue);
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+thead th {
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+}
+
+tbody td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f9fc;
+}
+
+code {
+    background-color: #eef6fc;
+    color: var(--dark-blue);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'D2Coding', 'Courier New', Courier, monospace;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 2rem;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--dark-blue);
+}
