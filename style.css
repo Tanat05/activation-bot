@@ -129,6 +129,46 @@ code {
     transition: background-color 0.3s ease;
 }
 
+/* === 명령어 인수(Argument) 스타일 === */
+.arg {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    margin: 0 0.2em;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    font-family: 'D2Coding', 'Courier New', Courier, monospace;
+    vertical-align: middle; /* 세로 정렬 맞추기 */
+}
+
+/* 필수 인수 스타일 */
+.arg.required {
+    background-color: var(--dark-blue);
+    color: white;
+    border: 1px solid var(--dark-blue);
+}
+
+/* 선택 인수 스타일 */
+.arg.optional {
+    background-color: #fff;
+    color: #555;
+    border: 1px dashed #aaa;
+}
+
+/* 범례(Legend) 박스 스타일 */
+.legend {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.legend strong {
+    margin-right: 1rem;
+}
+
 .back-button:hover {
     background-color: var(--dark-blue);
 }
