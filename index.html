@@ -157,6 +157,7 @@
                 </section>
 
                 <!-- Setup Section -->
+                                <!-- Setup Section -->
                 <section id="setup" class="mb-24 scroll-mt-20">
                     <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
                         <i data-lucide="rocket" class="text-primary w-8 h-8"></i>
@@ -165,16 +166,219 @@
                     <div class="grid gap-6">
                         <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
                             <h3 class="text-xl font-bold mb-4">1. 봇 초대하기</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">위의 '봇 초대하기' 버튼을 클릭하여 관리 권한이 있는 서버에 Activation을 추가하세요.</p>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">Activation 봇을 서버에 초대하여 관리 권한을 부여하세요.</p>
                             <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 flex gap-3">
                                 <i data-lucide="info" class="text-blue-500 shrink-0"></i>
-                                <p class="text-sm text-blue-700 dark:text-blue-300">원활한 기능을 위해 '관리자' 권한을 부여하는 것을 권장합니다.</p>
+                                <p class="text-sm text-blue-700 dark:text-blue-300">모든 기능을 정상적으로 사용하려면 '관리자' 권한이 필요합니다.</p>
                             </div>
                         </div>
                         <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <h3 class="text-xl font-bold mb-4">2. 초기 설정</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">서버에 초대 후 <code>/서버설정</code> 명령어를 통해 로그 채널 및 기본 설정을 완료하세요.</p>
-                            <pre><code>/서버설정 로그채널: #로그-채널</code></pre>
+                            <h3 class="text-xl font-bold mb-4">2. 서버 초기 셋업</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4"><code>/서버셋업</code> 명령어를 사용하면 서버 운영에 필요한 필수 채널과 역할을 자동으로 생성해 드립니다.</p>
+                            <pre><code>/서버셋업</code></pre>
+                        </div>
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <h3 class="text-xl font-bold mb-4">3. 로그 채널 설정</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">서버의 활동을 기록할 로그 채널을 한 번에 생성하거나 개별적으로 설정할 수 있습니다.</p>
+                            <div class="space-y-2">
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/로그채널 자동생성 - 모든 로그 채널 자동 생성</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/로그채널 채팅 - 채팅 로그 채널 개별 설정</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Admin Section -->
+                <section id="admin" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="shield" class="text-primary w-8 h-8"></i>
+                        관리자 도구
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="group p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800 hover:border-primary transition-colors">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-xl font-bold">서버 관리 및 설정</h3>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs font-medium">Admin Only</span>
+                            </div>
+                            <ul class="space-y-4">
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/서버셋업</code>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">서버의 채널과 역할을 자동 생성합니다.</span>
+                                </li>
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/서버셋업취소</code>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">최근 5분 내에 실행한 서버 셋업을 되돌립니다.</span>
+                                </li>
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/청소 [개수]</code>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">채널의 메시지를 대량으로 삭제합니다.</span>
+                                </li>
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/공지 [채널] [내용]</code>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">깔끔한 임베드 형식의 공지사항을 전송합니다.</span>
+                                </li>
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/역할지급</code>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">유저가 버튼을 클릭해 직접 역할을 가져갈 수 있는 메시지를 생성합니다.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Economy Section -->
+                <section id="economy" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="coins" class="text-primary w-8 h-8"></i>
+                        경제 및 활동
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="calendar-check" class="text-amber-600 dark:text-amber-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">출석 및 포인트</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">매일 출석하여 포인트를 모으고 상점에서 역할을 구매하세요.</p>
+                            <div class="space-y-2">
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/출석 - 일일 출석체크</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/역할구매 - 포인트로 역할 구매</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/출석설정 포인트 - 지급 포인트 설정</code>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="trending-up" class="text-emerald-600 dark:text-emerald-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">채팅 레벨</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">채팅 활동량에 따라 레벨이 상승하며 자동으로 역할이 부여됩니다.</p>
+                            <div class="space-y-2">
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/채팅레벨 자동세팅 - 레벨 역할 자동 생성</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/랭크 - 서버 활동 순위 확인</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/유저정보 - 내 포인트 및 레벨 확인</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Moderation Section -->
+                <section id="moderation" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="hammer" class="text-primary w-8 h-8"></i>
+                        보안 및 제재
+                    </h2>
+                    <div class="grid gap-6">
+                        <div class="bg-slate-900 text-white p-8 rounded-3xl overflow-hidden relative">
+                            <div class="relative z-10">
+                                <h3 class="text-2xl font-bold mb-4">자동 관리 및 처벌</h3>
+                                <p class="text-slate-400 mb-8 max-w-md">도배, 링크, 금지 이모지 등을 자동으로 감지하고 경고 누적 시 자동으로 처벌합니다.</p>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>도배 방지</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>링크 차단</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>이모지 금지</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>자동 처벌</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i data-lucide="shield-check" class="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 rotate-12"></i>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                                <h3 class="text-lg font-bold mb-4">제재 명령어</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex flex-col">
+                                        <code class="text-red-400">/경고 부여 [유저] [사유]</code>
+                                        <span class="text-sm text-slate-500">유저에게 경고를 부여합니다.</span>
+                                    </li>
+                                    <li class="flex flex-col">
+                                        <code class="text-red-400">/차단 [유저] [사유]</code>
+                                        <span class="text-sm text-slate-500">유저를 서버에서 차단합니다.</span>
+                                    </li>
+                                    <li class="flex flex-col">
+                                        <code class="text-red-400">/자동처벌 [횟수] [처벌]</code>
+                                        <span class="text-sm text-slate-500">경고 누적 시 처벌 수위를 설정합니다.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                                <h3 class="text-lg font-bold mb-4">신고 시스템</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex flex-col">
+                                        <code class="text-sky-400">/신고 [메시지링크]</code>
+                                        <span class="text-sm text-slate-500">부적절한 메시지를 신고합니다.</span>
+                                    </li>
+                                    <li class="flex flex-col">
+                                        <code class="text-sky-400">/유저신고 [유저] [사유]</code>
+                                        <span class="text-sm text-slate-500">유저를 관리자에게 신고합니다.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Utility Section -->
+                <section id="utility" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="wrench" class="text-primary w-8 h-8"></i>
+                        유틸리티
+                    </h2>
+                    <div class="grid gap-6">
+                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
+                            <div class="mt-1 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
+                                <i data-lucide="ticket" class="text-blue-600 dark:text-blue-400 w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-1">티켓 시스템</h4>
+                                <p class="text-slate-600 dark:text-slate-400 mb-3">유저가 문의를 남길 수 있는 1:1 티켓 채널을 생성합니다.</p>
+                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/티켓생성 - 티켓 생성 버튼 메시지 전송</code>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
+                            <div class="mt-1 p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl">
+                                <i data-lucide="users" class="text-indigo-600 dark:text-indigo-400 w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-1">자동 채널 관리</h4>
+                                <p class="text-slate-600 dark:text-slate-400 mb-3">서버 인원 카운트 채널과 자동 음성 채널을 관리합니다.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/카운트채널 추가</code>
+                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/자동음성채널 추가</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
+                            <div class="mt-1 p-3 bg-pink-100 dark:bg-pink-900/30 rounded-xl">
+                                <i data-lucide="sparkles" class="text-pink-600 dark:text-pink-400 w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-1">기타 기능</h4>
+                                <p class="text-slate-600 dark:text-slate-400 mb-3">초대 코드별 역할 부여, 스페셜 텍스트 자동 역할 등 특별한 기능을 제공합니다.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/초대역할 추가</code>
+                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/스페셜텍스트 추가</code>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
