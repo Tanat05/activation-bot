@@ -1,699 +1,1065 @@
 <!DOCTYPE html>
-<html lang="ko" class="light">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activation Bot - 스마트한 디스코드 관리의 시작</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#A0E8FF',
-                        'primary-dark': '#7DD3F7',
-                        dark: {
-                            bg: '#0F172A',
-                            sidebar: '#1E293B',
-                            card: '#1E293B',
-                            text: '#F8FAFC'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
-                    }
-                }
+    <title>디스코드 활성화 봇 기능 안내서</title>
+    
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="디스코드 활성화 봇 기능 안내서">
+    <meta property="og:description" content="서버를 더욱 편리하고 즐겁게 만드는 모든 기능들을 만나보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://tanat05.github.io/activation-bot/images/embed-preview.png">
+    <meta property="og:url" content="https://tanat05.github.io/activation-bot/">
+    <meta property="og:site_name" content="디스코드 활성화 봇">
+    <meta property="og:locale" content="ko_KR">
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="디스코드 활성화 봇 기능 안내서">
+    <meta name="twitter:description" content="서버를 더욱 편리하고 즐겁게 만드는 모든 기능들을 만나보세요.">
+    <meta name="twitter:image" content="https://tanat05.github.io/activation-bot/images/embed-preview.png">
+    
+    <!-- General meta tags -->
+    <meta name="description" content="디스코드 활성화 봇의 모든 기능을 확인하고 사용법을 배워보세요. 경고 시스템, 로그 관리, 스페셜 텍스트, 신고 기능 등 다양한 기능을 제공합니다.">
+    <meta name="keywords" content="디스코드, 봇, 활성화, Discord, Bot, 경고, 로그, 관리, 서버">
+    <meta name="author" content="타나트">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#5865f2">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tanat05.github.io/activation-bot/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://tanat05.github.io/activation-bot/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://tanat05.github.io/activation-bot/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://tanat05.github.io/activation-bot/images/apple-touch-icon.png">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #5865f2;
+            --primary-hover: #4752c4;
+            --secondary-color: #4f545c;
+            --background-color: #ffffff;
+            --surface-color: #f8f9fa;
+            --text-primary: #2c2f33;
+            --text-secondary: #747f8d;
+            --text-muted: #99aab5;
+            --border-color: #e3e5e8;
+            --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --border-radius: 12px;
+            --border-radius-large: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .main {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius-large);
+            padding: 32px 24px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .feature-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        /* Feature Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--background-color);
+            border-radius: var(--border-radius-large);
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .modal-header {
+            padding: 32px 32px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .modal-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .modal-body {
+            padding: 32px;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: var(--transition);
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .close-button:hover {
+            color: var(--text-primary);
+            background: var(--surface-color);
+        }
+        
+        /* Command Table */
+        .command-section {
+            margin-bottom: 40px;
+        }
+        
+        .command-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .command-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .command-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+        
+        .command-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .command-code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: var(--background-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        
+        /* Command Card Layout for Mobile */
+        .command-card {
+            display: none;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+        
+        .command-card-header {
+            margin-bottom: 12px;
+        }
+        
+        .command-card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .command-card-code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: var(--background-color);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        
+        .command-card-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .arg {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 2px 2px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .arg.required {
+            background: #5865F2;
+            color: white;
+        }
+        
+        .arg.optional {
+            background: #E0E3FF;
+            color: black;
+        }
+        
+        .legend {
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+        }
+        
+        /* Setup Instructions */
+        .setup-section {
+            margin-bottom: 40px;
+        }
+        
+        .setup-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
+        .setup-steps {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+        }
+        
+        .setup-steps ol {
+            padding-left: 20px;
+        }
+        
+        .setup-steps li {
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--surface-color);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer p {
+            color: var(--text-muted);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 0;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .main {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .feature-card {
+                padding: 24px 20px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 24px 20px;
+            }
+            
+            .command-table {
+                font-size: 0.9rem;
+            }
+            
+            .command-table th,
+            .command-table td {
+                padding: 12px;
             }
         }
-    </script>
-    <style>
-        .sidebar-active {
-            background-color: rgba(160, 232, 255, 0.1);
-            border-right: 4px solid #A0E8FF;
-            color: #0EA5E9;
-        }
-        .dark .sidebar-active {
-            background-color: rgba(160, 232, 255, 0.05);
-            color: #A0E8FF;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-        }
-        pre {
-            background-color: #f1f5f9;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-        }
-        .dark pre {
-            background-color: #334155;
-        }
-        code {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9em;
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 20px 16px;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 20px 16px;
+            }
         }
     </style>
 </head>
-<body class="bg-white dark:bg-dark-bg text-slate-900 dark:text-dark-text transition-colors duration-300">
-
-    <!-- Mobile Header -->
-    <header class="lg:hidden flex items-center justify-between p-4 border-b dark:border-slate-800 sticky top-0 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-md z-50">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <i data-lucide="bot" class="text-slate-900 w-5 h-5"></i>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>디스코드 활성화 봇</h1>
+                <p>서버를 더욱 편리하고 즐겁게 만드는 모든 기능들을 만나보세요</p>
             </div>
-            <span class="font-bold text-xl tracking-tight">Activation</span>
-        </div>
-        <div class="flex items-center gap-4">
-            <button id="theme-toggle-mobile" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
-                <i data-lucide="sun" class="hidden dark:block w-5 h-5"></i>
-                <i data-lucide="moon" class="block dark:hidden w-5 h-5"></i>
-            </button>
-            <button id="menu-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
         </div>
     </header>
 
-    <div class="flex min-h-screen">
-        <!-- Sidebar -->
-        <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-slate-50 dark:bg-dark-sidebar border-r dark:border-slate-800 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen overflow-y-auto">
-            <div class="p-6 hidden lg:flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                    <i data-lucide="bot" class="text-slate-900 w-6 h-6"></i>
-                </div>
-                <span class="font-bold text-2xl tracking-tight">Activation</span>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+
+            <div class="features-grid">
+                <a href="#" class="feature-card" data-feature="warning">
+                    <span class="feature-icon">⚠️</span>
+                    <h3 class="feature-title">경고 시스템</h3>
+                    <p class="feature-description">서버 내 유저에게 경고를 부여하고 관리하는 기능</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="logging">
+                    <span class="feature-icon">📜</span>
+                    <h3 class="feature-title">로그 관리</h3>
+                    <p class="feature-description">서버 내 모든 활동을 체계적으로 기록</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="special-text">
+                    <span class="feature-icon">✨</span>
+                    <h3 class="feature-title">스페셜 텍스트</h3>
+                    <p class="feature-description">비밀 문구를 입력하면 역할 지급</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="emergency">
+                    <span class="feature-icon">🚨</span>
+                    <h3 class="feature-title">신고</h3>
+                    <p class="feature-description">문제 상황을 신속하게 신고하는 기능 및 즉시 대응 시스템</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="role-management">
+                    <span class="feature-icon">🏅</span>
+                    <h3 class="feature-title">역할 지급</h3>
+                    <p class="feature-description">역할 부여 버튼 생성</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="emoji-ban">
+                    <span class="feature-icon">🚫</span>
+                    <h3 class="feature-title">이모지 금지</h3>
+                    <p class="feature-description">특정 이모지 사용을 제한하는 기능</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="events">
+                    <span class="feature-icon">🎉</span>
+                    <h3 class="feature-title">이벤트 관리</h3>
+                    <p class="feature-description">다양한 서버 이벤트를 쉽게 관리</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="auto-management">
+                    <span class="feature-icon">🤖</span>
+                    <h3 class="feature-title">자동 관리</h3>
+                    <p class="feature-description">서버를 자동으로 관리하는 스마트 기능</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="chat-level">
+                    <span class="feature-icon">📈</span>
+                    <h3 class="feature-title">채팅 레벨</h3>
+                    <p class="feature-description">사용자 활동도 기반 레벨 시스템</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="attendance">
+                    <span class="feature-icon">✅</span>
+                    <h3 class="feature-title">출석 체크</h3>
+                    <p class="feature-description">일일 출석 체크 및 보상 시스템</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="count-channel">
+                    <span class="feature-icon">🔢</span>
+                    <h3 class="feature-title">카운트 채널</h3>
+                    <p class="feature-description">숫자 세기 게임 및 통계 채널</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="ticket">
+                    <span class="feature-icon">🎫</span>
+                    <h3 class="feature-title">티켓 시스템</h3>
+                    <p class="feature-description">개인 문의 및 지원 티켓 관리</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="another-feature">
+                    <span class="feature-icon">🔧</span>
+                    <h3 class="feature-title">기타 기능</h3>
+                    <p class="feature-description">다양한 추가 기능 및 설정</p>
+                </a>
             </div>
+        </div>
+    </main>
 
-            <nav class="px-4 space-y-8 pb-10">
-                <div>
-                    <h3 class="px-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">시작하기</h3>
-                    <ul class="space-y-1">
-                        <li><a href="#intro" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="home" class="w-4 h-4"></i>소개</a></li>
-                        <li><a href="#setup" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="rocket" class="w-4 h-4"></i>초대 및 설정</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="px-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">주요 기능</h3>
-                    <ul class="space-y-1">
-                        <li><a href="#admin" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="shield" class="w-4 h-4"></i>관리자 도구</a></li>
-                        <li><a href="#economy" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="coins" class="w-4 h-4"></i>경제 및 활동</a></li>
-                        <li><a href="#moderation" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="hammer" class="w-4 h-4"></i>보안 및 제재</a></li>
-                        <li><a href="#utility" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="wrench" class="w-4 h-4"></i>유틸리티</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="px-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">기타</h3>
-                    <ul class="space-y-1">
-                        <li><a href="#support" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="help-circle" class="w-4 h-4"></i>고객 지원</a></li>
-                    </ul>
-                </div>
-            </nav>
-
-            <div class="absolute bottom-0 left-0 right-0 p-4 border-t dark:border-slate-800 bg-slate-50 dark:bg-dark-sidebar hidden lg:block">
-                <button id="theme-toggle" class="flex items-center justify-center gap-2 w-full py-2 rounded-lg border dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-                    <i data-lucide="sun" class="hidden dark:block w-4 h-4"></i>
-                    <i data-lucide="moon" class="block dark:hidden w-4 h-4"></i>
-                    <span class="text-sm font-medium">테마 변경</span>
-                </button>
+    <!-- Modal for Feature Details -->
+    <div class="modal" id="featureModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-subtitle" id="modalSubtitle"></p>
             </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 lg:ml-0 overflow-x-hidden">
-            <div class="max-w-4xl mx-auto px-6 py-12 lg:px-12 lg:py-20">
-                
-                <!-- Intro Section -->
-                <section id="intro" class="mb-24">
-                    <div class="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide text-sky-600 uppercase bg-sky-100 rounded-full dark:bg-sky-900/30 dark:text-sky-400">
-                        Activation Bot
-                    </div>
-                    <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">
-                        더욱 강력하고 스마트한<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">디스코드 서버 관리</span>
-                    </h1>
-                    <p class="text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
-                        Activation은 서버 관리, 경제 시스템, 보안 기능을 하나로 통합한 올인원 디스코드 봇입니다. 
-                        복잡한 설정 없이도 서버를 활기차고 안전하게 유지할 수 있습니다.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="px-8 py-4 bg-primary hover:bg-primary-dark text-slate-900 font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-primary/25 flex items-center gap-2">
-                            <i data-lucide="plus-circle" class="w-5 h-5"></i>
-                            봇 초대하기
-                        </a>
-                        <a href="#setup" class="px-8 py-4 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold rounded-xl transition-all flex items-center gap-2">
-                            <i data-lucide="book-open" class="w-5 h-5"></i>
-                            사용 가이드
-                        </a>
-                    </div>
-                </section>
-
-                <!-- Setup Section -->
-                                <!-- Setup Section -->
-                <section id="setup" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="rocket" class="text-primary w-8 h-8"></i>
-                        초대 및 설정
-                    </h2>
-                    <div class="grid gap-6">
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <h3 class="text-xl font-bold mb-4">1. 봇 초대하기</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">Activation 봇을 서버에 초대하여 관리 권한을 부여하세요.</p>
-                            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 flex gap-3">
-                                <i data-lucide="info" class="text-blue-500 shrink-0"></i>
-                                <p class="text-sm text-blue-700 dark:text-blue-300">모든 기능을 정상적으로 사용하려면 '관리자' 권한이 필요합니다.</p>
-                            </div>
-                        </div>
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <h3 class="text-xl font-bold mb-4">2. 서버 초기 셋업</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4"><code>/서버셋업</code> 명령어를 사용하면 서버 운영에 필요한 필수 채널과 역할을 자동으로 생성해 드립니다.</p>
-                            <pre><code>/서버셋업</code></pre>
-                        </div>
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <h3 class="text-xl font-bold mb-4">3. 로그 채널 설정</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">서버의 활동을 기록할 로그 채널을 한 번에 생성하거나 개별적으로 설정할 수 있습니다.</p>
-                            <div class="space-y-2">
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/로그채널 자동생성 - 모든 로그 채널 자동 생성</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/로그채널 채팅 - 채팅 로그 채널 개별 설정</code>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Admin Section -->
-                <section id="admin" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="shield" class="text-primary w-8 h-8"></i>
-                        관리자 도구
-                    </h2>
-                    <div class="space-y-6">
-                        <div class="group p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800 hover:border-primary transition-colors">
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-xl font-bold">서버 관리 및 설정</h3>
-                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs font-medium">Admin Only</span>
-                            </div>
-                            <ul class="space-y-4">
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/서버셋업</code>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">서버의 채널과 역할을 자동 생성합니다.</span>
-                                </li>
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/서버셋업취소</code>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">최근 5분 내에 실행한 서버 셋업을 되돌립니다.</span>
-                                </li>
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/청소 [개수]</code>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">채널의 메시지를 대량으로 삭제합니다.</span>
-                                </li>
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/공지 [채널] [내용]</code>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">깔끔한 임베드 형식의 공지사항을 전송합니다.</span>
-                                </li>
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/역할지급</code>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">유저가 버튼을 클릭해 직접 역할을 가져갈 수 있는 메시지를 생성합니다.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Economy Section -->
-                <section id="economy" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="coins" class="text-primary w-8 h-8"></i>
-                        경제 및 활동
-                    </h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center mb-4">
-                                <i data-lucide="calendar-check" class="text-amber-600 dark:text-amber-400"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">출석 및 포인트</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">매일 출석하여 포인트를 모으고 상점에서 역할을 구매하세요.</p>
-                            <div class="space-y-2">
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/출석 - 일일 출석체크</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/역할구매 - 포인트로 역할 구매</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/출석설정 포인트 - 지급 포인트 설정</code>
-                            </div>
-                        </div>
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-4">
-                                <i data-lucide="trending-up" class="text-emerald-600 dark:text-emerald-400"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">채팅 레벨</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">채팅 활동량에 따라 레벨이 상승하며 자동으로 역할이 부여됩니다.</p>
-                            <div class="space-y-2">
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/채팅레벨 자동세팅 - 레벨 역할 자동 생성</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/랭크 - 서버 활동 순위 확인</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/유저정보 - 내 포인트 및 레벨 확인</code>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Moderation Section -->
-                <section id="moderation" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="hammer" class="text-primary w-8 h-8"></i>
-                        보안 및 제재
-                    </h2>
-                    <div class="grid gap-6">
-                        <div class="bg-slate-900 text-white p-8 rounded-3xl overflow-hidden relative">
-                            <div class="relative z-10">
-                                <h3 class="text-2xl font-bold mb-4">자동 관리 및 처벌</h3>
-                                <p class="text-slate-400 mb-8 max-w-md">도배, 링크, 금지 이모지 등을 자동으로 감지하고 경고 누적 시 자동으로 처벌합니다.</p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>도배 방지</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>링크 차단</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>이모지 금지</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>자동 처벌</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i data-lucide="shield-check" class="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 rotate-12"></i>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                                <h3 class="text-lg font-bold mb-4">제재 명령어</h3>
-                                <ul class="space-y-3">
-                                    <li class="flex flex-col">
-                                        <code class="text-red-400">/경고 부여 [유저] [사유]</code>
-                                        <span class="text-sm text-slate-500">유저에게 경고를 부여합니다.</span>
-                                    </li>
-                                    <li class="flex flex-col">
-                                        <code class="text-red-400">/차단 [유저] [사유]</code>
-                                        <span class="text-sm text-slate-500">유저를 서버에서 차단합니다.</span>
-                                    </li>
-                                    <li class="flex flex-col">
-                                        <code class="text-red-400">/자동처벌 [횟수] [처벌]</code>
-                                        <span class="text-sm text-slate-500">경고 누적 시 처벌 수위를 설정합니다.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                                <h3 class="text-lg font-bold mb-4">신고 시스템</h3>
-                                <ul class="space-y-3">
-                                    <li class="flex flex-col">
-                                        <code class="text-sky-400">/신고 [메시지링크]</code>
-                                        <span class="text-sm text-slate-500">부적절한 메시지를 신고합니다.</span>
-                                    </li>
-                                    <li class="flex flex-col">
-                                        <code class="text-sky-400">/유저신고 [유저] [사유]</code>
-                                        <span class="text-sm text-slate-500">유저를 관리자에게 신고합니다.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Utility Section -->
-                <section id="utility" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="wrench" class="text-primary w-8 h-8"></i>
-                        유틸리티
-                    </h2>
-                    <div class="grid gap-6">
-                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
-                            <div class="mt-1 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                                <i data-lucide="ticket" class="text-blue-600 dark:text-blue-400 w-6 h-6"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-lg font-bold mb-1">티켓 시스템</h4>
-                                <p class="text-slate-600 dark:text-slate-400 mb-3">유저가 문의를 남길 수 있는 1:1 티켓 채널을 생성합니다.</p>
-                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/티켓생성 - 티켓 생성 버튼 메시지 전송</code>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
-                            <div class="mt-1 p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl">
-                                <i data-lucide="users" class="text-indigo-600 dark:text-indigo-400 w-6 h-6"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-lg font-bold mb-1">자동 채널 관리</h4>
-                                <p class="text-slate-600 dark:text-slate-400 mb-3">서버 인원 카운트 채널과 자동 음성 채널을 관리합니다.</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/카운트채널 추가</code>
-                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/자동음성채널 추가</code>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
-                            <div class="mt-1 p-3 bg-pink-100 dark:bg-pink-900/30 rounded-xl">
-                                <i data-lucide="sparkles" class="text-pink-600 dark:text-pink-400 w-6 h-6"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-lg font-bold mb-1">기타 기능</h4>
-                                <p class="text-slate-600 dark:text-slate-400 mb-3">초대 코드별 역할 부여, 스페셜 텍스트 자동 역할 등 특별한 기능을 제공합니다.</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/초대역할 추가</code>
-                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/스페셜텍스트 추가</code>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Admin Section -->
-                <section id="admin" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="shield" class="text-primary w-8 h-8"></i>
-                        관리자 도구
-                    </h2>
-                    <div class="space-y-6">
-                        <div class="group p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800 hover:border-primary transition-colors">
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-xl font-bold">서버 관리 명령어</h3>
-                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs font-medium">Admin Only</span>
-                            </div>
-                            <ul class="space-y-4">
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/서버설정</code>
-                                        <span class="text-xs text-slate-400">로그, 환영/퇴장 채널 설정</span>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">서버의 전반적인 기능을 설정합니다. 로그 채널을 설정하면 모든 활동이 기록됩니다.</span>
-                                </li>
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/청소 [개수]</code>
-                                        <span class="text-xs text-slate-400">메시지 대량 삭제</span>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">채널의 메시지를 지정한 개수만큼 삭제합니다. (최대 100개)</span>
-                                </li>
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/임베드</code>
-                                        <span class="text-xs text-slate-400">커스텀 메시지 생성</span>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">깔끔한 임베드 메시지를 생성하여 공지사항 등을 작성합니다.</span>
-                                </li>
-                                <li class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <code class="text-sky-500 font-bold">/이모지차단</code>
-                                        <span class="text-xs text-slate-400">특정 이모지 사용 제한</span>
-                                    </div>
-                                    <span class="text-slate-600 dark:text-slate-400">서버에서 사용을 금지할 이모지를 설정합니다.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Economy Section -->
-                <section id="economy" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="coins" class="text-primary w-8 h-8"></i>
-                        경제 및 활동
-                    </h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center mb-4">
-                                <i data-lucide="calendar-check" class="text-amber-600 dark:text-amber-400"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">출석체크</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">매일 <code>/출석</code> 명령어로 포인트를 획득하세요. 연속 출석 시 추가 보상이 지급됩니다.</p>
-                            <div class="space-y-2">
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/출석 - 일일 출석</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/내정보 - 포인트 및 정보 확인</code>
-                            </div>
-                        </div>
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-4">
-                                <i data-lucide="trending-up" class="text-emerald-600 dark:text-emerald-400"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">레벨 시스템</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">채팅 활동을 통해 경험치를 얻고 레벨업하세요. 레벨에 따른 역할 자동 부여도 가능합니다.</p>
-                            <div class="space-y-2">
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/레벨 - 현재 레벨 확인</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/랭킹 - 서버 레벨 순위</code>
-                            </div>
-                        </div>
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-4">
-                                <i data-lucide="shopping-bag" class="text-purple-600 dark:text-purple-400"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">역할 상점</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">모은 포인트로 특별한 역할을 구매할 수 있습니다. 관리자가 상점 품목을 직접 설정합니다.</p>
-                            <div class="space-y-2">
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/상점 - 판매 중인 역할 목록</code>
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/구매 [역할이름] - 역할 구매</code>
-                            </div>
-                        </div>
-                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                            <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900/30 rounded-xl flex items-center justify-center mb-4">
-                                <i data-lucide="gift" class="text-sky-600 dark:text-sky-400"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">이벤트</h3>
-                            <p class="text-slate-600 dark:text-slate-400 mb-4">서버에서 진행되는 다양한 이벤트에 참여하고 보상을 받으세요.</p>
-                            <div class="space-y-2">
-                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/이벤트 목록 - 진행 중인 이벤트</code>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Moderation Section -->
-                <section id="moderation" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="hammer" class="text-primary w-8 h-8"></i>
-                        보안 및 제재
-                    </h2>
-                    <div class="grid gap-6">
-                        <div class="bg-slate-900 text-white p-8 rounded-3xl overflow-hidden relative">
-                            <div class="relative z-10">
-                                <h3 class="text-2xl font-bold mb-4">자동 관리 시스템</h3>
-                                <p class="text-slate-400 mb-8 max-w-md">욕설, 도배, 유해 링크 등을 실시간으로 감지하고 자동으로 제재합니다. 서버의 평화를 Activation에게 맡기세요.</p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>욕설 필터링</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>도배 방지</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>링크 차단</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
-                                        <span>경고 시스템</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <i data-lucide="shield-check" class="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 rotate-12"></i>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                                <h3 class="text-lg font-bold mb-4">수동 제재 명령어</h3>
-                                <ul class="space-y-3">
-                                    <li class="flex flex-col">
-                                        <code class="text-red-400">/경고 [유저] [사유]</code>
-                                        <span class="text-sm text-slate-500">유저에게 경고를 부여합니다.</span>
-                                    </li>
-                                    <li class="flex flex-col">
-                                        <code class="text-red-400">/차단 [유저] [사유]</code>
-                                        <span class="text-sm text-slate-500">유저를 서버에서 영구 차단합니다.</span>
-                                    </li>
-                                    <li class="flex flex-col">
-                                        <code class="text-red-400">/추방 [유저] [사유]</code>
-                                        <span class="text-sm text-slate-500">유저를 서버에서 추방합니다.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
-                                <h3 class="text-lg font-bold mb-4">처벌 기록 확인</h3>
-                                <ul class="space-y-3">
-                                    <li class="flex flex-col">
-                                        <code class="text-sky-400">/경고확인 [유저]</code>
-                                        <span class="text-sm text-slate-500">특정 유저의 경고 내역을 확인합니다.</span>
-                                    </li>
-                                    <li class="flex flex-col">
-                                        <code class="text-sky-400">/경고삭제 [유저] [번호]</code>
-                                        <span class="text-sm text-slate-500">잘못 부여된 경고를 삭제합니다.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Utility Section -->
-                <section id="utility" class="mb-24 scroll-mt-20">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <i data-lucide="wrench" class="text-primary w-8 h-8"></i>
-                        유틸리티
-                    </h2>
-                    <div class="grid gap-6">
-                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
-                            <div class="mt-1 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                                <i data-lucide="ticket" class="text-blue-600 dark:text-blue-400 w-6 h-6"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-lg font-bold mb-1">티켓 시스템</h4>
-                                <p class="text-slate-600 dark:text-slate-400 mb-3">1:1 문의 채널을 생성하여 체계적인 고객 지원이 가능합니다. 관리자만 접근 가능한 비공개 채널이 생성됩니다.</p>
-                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/티켓설정 - 티켓 시스템 활성화</code>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
-                            <div class="mt-1 p-3 bg-pink-100 dark:bg-pink-900/30 rounded-xl">
-                                <i data-lucide="hash" class="text-pink-600 dark:text-pink-400 w-6 h-6"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-lg font-bold mb-1">숫자 세기</h4>
-                                <p class="text-slate-600 dark:text-slate-400 mb-3">서버 멤버들과 함께 숫자를 세며 소통하는 미니게임을 즐기세요. 숫자가 틀리면 처음부터 다시 시작해야 합니다!</p>
-                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/숫자세기설정 - 채널 지정</code>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
-                            <div class="mt-1 p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
-                                <i data-lucide="alert-triangle" class="text-orange-600 dark:text-orange-400 w-6 h-6"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-lg font-bold mb-1">신고 시스템</h4>
-                                <p class="text-slate-600 dark:text-slate-400 mb-3">유저의 부적절한 행동을 관리자에게 익명으로 신고할 수 있습니다. 신고 내용은 지정된 로그 채널로 전송됩니다.</p>
-                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/신고 [유저] [내용]</code>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
-                            <div class="mt-1 p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl">
-                                <i data-lucide="info" class="text-indigo-600 dark:text-indigo-400 w-6 h-6"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-lg font-bold mb-1">기타 유틸리티</h4>
-                                <p class="text-slate-600 dark:text-slate-400 mb-3">서버 정보 확인, 유저 정보 조회 등 다양한 편의 기능을 제공합니다.</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/서버정보</code>
-                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/유저정보</code>
-                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/핑</code>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Support Section -->
-                <section id="support" class="mb-24 scroll-mt-20">
-                    <div class="p-10 bg-gradient-to-br from-sky-400 to-blue-600 rounded-3xl text-white text-center">
-                        <h2 class="text-3xl font-bold mb-4">도움이 필요하신가요?</h2>
-                        <p class="mb-8 opacity-90">Activation 사용 중 궁금한 점이나 버그 제보는 공식 지원 서버를 이용해 주세요.</p>
-                        <div class="flex justify-center gap-4">
-                            <a href="#" class="px-6 py-3 bg-white text-blue-600 font-bold rounded-xl hover:bg-opacity-90 transition-all">지원 서버 입장</a>
-                            <a href="#" class="px-6 py-3 bg-blue-700 text-white font-bold rounded-xl hover:bg-blue-800 transition-all">문의하기</a>
-                        </div>
-                    </div>
-                </section>
-
-                <footer class="pt-12 border-t dark:border-slate-800 text-center text-slate-500 dark:text-slate-400 text-sm">
-                    <p>© 2025 Activation Bot. All rights reserved.</p>
-                    <p class="mt-2">Designed with ❤️ for Discord Communities</p>
-                </footer>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted here -->
             </div>
-        </main>
+        </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden"></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 discord activation & Tanat05. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Theme Toggle Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-        const html = document.documentElement;
-
-        function toggleTheme() {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
+        // Feature data
+        const features = {
+            warning: {
+                title: "⚠️ 경고 시스템",
+                subtitle: "서버 내 유저에게 경고를 부여하고 관리하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/경고 부여 <span class="arg required">유저</span> <span class="arg optional">사유</span>',
+                        description: '<span class="arg required">유저</span>에게 경고를 1회 부여합니다.<br>사유의 경우 처벌 로그채널이 설정되어있다면 로그에 사유가 같이 표기됩니다.'
+                    },
+                    {
+                        command: '/경고 차감 <span class="arg required">유저</span> <span class="arg optional">개수</span>',
+                        description: '<span class="arg required">유저</span>의 경고가 <span class="arg optional">개수</span>개 차감됩니다.'
+                    },
+                    {
+                        command: '/경고 자동차감 <span class="arg required">역할</span> <span class="arg required">경고수</span> <span class="arg required">시간</span>',
+                        description: '<span class="arg required">역할</span>을 가진 유저의 경고를 설정한 <span class="arg required">시간</span>마다 지정한 <span class="arg required">경고수</span>만큼 차감합니다.'
+                    },
+                    {
+                        command: '/경고 자동차감목록',
+                        description: '현재 설정된 경고 자동제거의 목록을 확인합니다.'
+                    },
+                    {
+                        command: '/경고 자동차감감해제 <span class="arg required">역할</span>',
+                        description: '<span class="arg required">역할</span>에 설정된 경고 자동제거 기능을 해제합니다.'
+                    }
+                ],
+                setup: [
+                    "경고 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "유저 차단, 유저 추방, 역할 관리 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "경고가 부여되면 지정된 로그 채널에 자동으로 기록됩니다. (로그 기능 설정 필요)"
+                ]
+            },
+            logging: {
+                title: "📜 로그 관리",
+                subtitle: "서버 내 모든 활동을 체계적으로 기록합니다.",
+                commands: [
+                    {
+                        command: '/로그채널 생성',
+                        description: '서버의 로그를 기록할 채널을 자동으로 생성하고 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 자동생성',
+                        description: '/로그 생성 명령어와 같은 기능입니다. 단, 로그 채널이 이미 존재하는 않은 로그만 생성합니다.'
+                    },
+                    {
+                        command: '/로그채널 채팅',
+                        description: '채팅 메시지 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 음성',
+                        description: '음성 채널 접속/퇴장 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 역할',
+                        description: '역할 변경 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 처벌',
+                        description: '처벌 기록과 경고 부여/차감 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 신고',
+                        description: '신고 접수 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 레벨업',
+                        description: '레벨업 기록을 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 부스트',
+                        description: '서버 부스트 기록을 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 닉네임',
+                        description: '닉네임 변경 로그를 기록할 채널을 설정합니다.'
+                    },
+                    {
+                        command: '/로그채널 환영 <span class="arg required">제목</span> <span class="arg required">내용</span> <span class="arg required">색상</span> <span class="arg optional">이미지</span>',
+                        description: '신규 유저 환영 메시지를 전송합니다.<br><span class="arg required">제목</span>과 <span class="arg required">내용</span>은 환영 메시지의 제목과 내용을 설정합니다.<br><span class="arg required">색상</span>은 환영 메시지의 배경 색상을 설정합니다. (16진수 색상 코드 사용)<br><span class="arg optional">이미지</span>는 환영 메시지에 표시할 이미지 URL을 설정합니다.'
+                    },
+                ],
+                setup: [
+                    "로그 기능은 채널 관리, 서버 관리 권한이 있으면 설정할 수 있습니다.",
+                    "설정된 채널에 서버 내 모든 활동이 자동으로 기록됩니다."
+                ]
+            },
+            "special-text": {
+                title: "✨ 스페셜 텍스트",
+                subtitle: "특별한 텍스트 효과와 서식 기능을 제공합니다.",
+                commands: [
+                    {
+                        command: '/스페셜텍스트 추가 <span class="arg required">문구</span> <span class="arg required">역할</span>',
+                        description: '<span class="arg required">문구</span>를 입력하면 <span class="arg required">역할</span>이 지급됩니다.<br>문구는 대소문자를 구분하지 않으며, 공백을 포함할 수 있습니다.'
+                    },
+                    {
+                        command: '/스페셜텍스트 제거 <span class="arg required">문구</span>',
+                        description: '<span class="arg required">문구</span>에 해당하는 스페셜 텍스트를 제거합니다.'
+                    }
+                ],
+                setup: [
+                    "스페셜 텍스트 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "스페셜 텍스트를 입력하면 자동으로 역할이 지급되며, 해당 역할은 서버 내에서 특별한 권한을 부여할 수 있습니다."
+                ]
+            },
+            emergency: {
+                title: "🚨 신고",
+                subtitle: "문제 상황을 신속하게 신고하는 기능 및 즉시 대응 시스템입니다.",
+                commands: [
+                    {
+                        command: '/신고 <span class="arg required">메세지</span>',
+                        description: '<span class="arg required">메세지</span>를 입력하여 신고합니다.<br>신고는 지정된 신고 채널에 자동으로 기록되며, 관리자에게 알림이 전송됩니다.<br>신고가 누적된 메세지는 자동으로 삭제됩니다.'
+                    },
+                    {
+                        command: '/유저신고 <span class="arg required">유저</span> <span class="arg required">사유</span> <span class="arg optional">증거</span>',
+                        description: '<span class="arg required">유저</span>를 <span class="arg required">사유</span>로 신고합니다.<br><span class="arg optional">증거</span>는 선택 사항이며, 파일을 첨부할 수 있습니다.<br>신고는 지정된 신고 채널에 자동으로 기록되며, 관리자에게 알림이 전송됩니다.'
+                    },
+                    {
+                        command: '/신고설정 기본 <span class="arg required">누적수</span> <span class="arg required">처벌</span>',
+                        description: '신고 기능의 기본 설정을 변경합니다.<br><span class="arg required">누적수</span>는 신고가 누적되어 처벌이 적용되는 횟수를 설정합니다.<br><span class="arg required">처벌</span>은 누적된 신고에 대한 처벌을 설정합니다. (예: 타임아웃, 추방, 차단 등)'
+                    },
+                    {
+                        command: '/신고설정 제외 <span class="arg required">역할</span>',
+                        description: '신고 기능에서 제외할 역할을 설정합니다.<br><span class="arg required">역할</span>은 신고 기능이 적용되지 않는 역할을 지정합니다.'
+                    },
+                    {
+                        command: '/신고설정 알림 <span class="arg required">역할</span>',
+                        description: '신고 발생 시 알림을 받을 역할을 설정합니다.<br><span class="arg required">역할</span>은 신고 발생 시 알림을 받을 역할을 지정합니다.'
+                    },
+                ],
+                setup: [
+                    "신고 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "추방, 차단 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "신고는 지정된 신고 채널에 자동으로 기록되며, 관리자에게 알림이 전송됩니다."
+                ]
+            },
+            "role-management": {
+                title: "🏅 역할 지급",
+                subtitle: "역할을 지급하는 버튼을 생성하고 관리하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/역할지급 <span class="arg required">채널</span> <span class="arg required">제목</span> <span class="arg required">내용</span> <span class="arg required">역할</span> <span class="arg required">버튼_이름</span> <span class="arg optional">색상</span>',
+                        description: '지정된 <span class="arg required">채널</span>에 역할 지급 버튼을 생성합니다.<br><span class="arg required">제목</span>과 <span class="arg required">내용</span>은 임베드의 제목과 내용을 설정합니다.<br><span class="arg required">역할</span>은 버튼 클릭 시 지급될 역할을 지정합니다.<br><span class="arg required">버튼_이름</span>은 버튼에 표시될 이름을 설정합니다.<br><span class="arg optional">색상</span>은 임베드의 색상을 설정합니다.'
+                    }
+                ],
+                setup: [
+                    "역할 지급 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "자동 역할 부여 기능은 서버 내 활동에 따라 자동으로 역할을 부여하는 기능입니다."
+                ]
+            },
+            "emoji-ban": {
+                title: "🚫 이모지 금지",
+                subtitle: "특정 이모지 사용을 제한하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/이모지 금지 <span class="arg required">이모지</span> <span class="arg required">처벌</span>',
+                        description: '<span class="arg required">이모지</span>를 금지 목록에 추가합니다.<br>추가된 이모지는 서버 내에서 사용할 수 없습니다.'
+                    },
+                    {
+                        command: '/이모지 금지해제 <span class="arg required">이모지</span>',
+                        description: '<span class="arg required">이모지</span>를 금지 목록에서 제거합니다.<br>제거된 이모지는 다시 사용할 수 있습니다.'
+                    },
+                ],
+                setup: [
+                    "이모지 금지 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "금지된 이모지를 사용하려는 경우, 봇이 자동으로 제거하고 처벌합니다."
+                ]
+            },
+            events: {
+                title: "🎉 이벤트 관리",
+                subtitle: "다양한 서버 이벤트를 쉽게 관리하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/이벤트 생성 <span class="arg required">시간</span> <span class="arg required">우승자</span> <span class="arg required">상품</span>',
+                        description: '이벤트를 생성합니다.<br><span class="arg required">시간</span>은 이벤트가 진행될 시간을 설정합니다.<br><span class="arg required">우승자</span>는 이벤트의 우승자 수를 설정합니다.<br><span class="arg required">상품</span>은 이벤트 우승자에게 지급될 상품을 설정합니다.'
+                    },
+                    {
+                        command: '/이벤트 삭제 <span class="arg required">상품</span>',
+                        description: '<span class="arg required">상품</span>에 해당하는 이벤트를 삭제합니다.<br>삭제된 이벤트는 복구할 수 없습니다.'
+                    },
+                    {
+                        command: '/이벤트 종료 <span class="arg required">상품</span>',
+                        description: '<span class="arg required">상품</span>에 해당하는 이벤트를 즉시 종료합니다.<br>종료된 이벤트는 더 이상 참여할 수 없습니다.'
+                    },
+                ],
+                setup: [
+                    "이벤트 관리 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "관리자 권한이 있는 모든 유저가 사용이 가능합니다.",
+                    "생성된 이벤트는 지정된 채널에 자동으로 공지됩니다."
+                ]
+            },
+            "auto-management": {
+                title: "🤖 자동 관리",
+                subtitle: "서버를 자동으로 관리하는 기능입니다.",
+                commands: [
+                    {
+                        command: '/자동관리 추가 <span class="arg required">행동</span> <span class="arg required">처벌</span>',
+                        description: '<span class="arg required">행동</span>에 대해 자동으로 처벌을 적용합니다.<br><span class="arg required">처벌</span>은 해당 행동에 대한 처벌을 설정합니다. (예: 타임아웃, 추방 등)'
+                    },
+                    {
+                        command: '/자동관리 제거 <span class="arg required">행동</span>',
+                        description: '<span class="arg required">행동</span>에 대한 자동 관리 기능을 제거합니다.<br>제거된 행동은 더 이상 자동으로 관리되지 않습니다.'
+                    },
+                    {
+                        command: '/자동관리 제외 <span class="arg required">역할</span>',
+                        description: '<span class="arg required">역할</span>을 가진 유저는 자동 관리 기능에서 제외합니다.<br>제외된 역할을 가진 유저는 자동 처벌 대상이 되지 않습니다.'
+                    }
+                ]
+            },
+            "chat-level": {
+                title: "📈 채팅 레벨",
+                subtitle: "사용자 활동도 기반 레벨 시스템입니다.",
+                commands: [
+                    {
+                        command: '/채팅레벨 자동설정',
+                        description: '채팅 레벨 시스템을 자동으로 설정합니다.<br>이 명령어를 실행하면 채팅 레벨 시스템이 활성화되고, 1~10 레벨의 역할이 자동으로 생성됩니다.'
+                    },
+                    {
+                        command: '/채팅레벨 역할설정 <span class="arg required">레벨</span> <span class="arg required">역할</span>',
+                        description: '특정 <span class="arg required">레벨</span>에 해당하는 <span class="arg required">역할</span>을 설정합니다.<br>이 명령어를 사용하여 레벨별 역할을 지정할 수 있습니다.'
+                    }
+                ],
+                setup: [
+                    "사용자가 채팅을 통해 활동할 때마다 경험치를 획득하고, 일정 경험치에 도달하면 레벨이 상승합니다.",
+                    "레벨은 `-1 + (1 + 8 * (채팅 포인트 / 100))의 제곱근`(소수점 아래 버림)로 계산되며, 레벨에 따라 역할이 자동으로 지급됩니다.",
+                    "레벨 상승 시 자동으로 역할이 지급되며, 이를 통해 사용자 활동을 장려합니다."
+                ]
+            },
+            attendance: {
+                title: "✅ 출석 체크",
+                subtitle: "일일 출석 체크 및 보상 시스템입니다.",
+                commands: [
+                    {
+                        command: '/출석',
+                        description: '오늘의 출석을 체크합니다.<br>출석 체크를 완료하면 보상을 받을 수 있습니다.'
+                    },
+                    {
+                        command: '/출석설정 <span class="arg required">포인트</span>',
+                        description: '출석 체크 시 지급되는 <span class="arg required">포인트</span>를 설정합니다.<br>포인트는 사용자가 출석 체크를 완료할 때마다 지급됩니다.'
+                    },
+                    {
+                        command: '/출석설정 포인트상점 추가 <span class="arg required">역할</span> <span class="arg required">포인트</span>',
+                        description: '출석 체크로 획득한 포인트를 사용하여 <span class="arg required">역할</span>을 구매할 수 있는 상점을 추가합니다.<br><span class="arg required">포인트</span>는 해당 역할을 구매하는 데 필요한 포인트 수를 설정합니다.'
+                    },
+                    {
+                        command: '/출석설정 포인트상점 제거 <span class="arg required">역할</span>',
+                        description: '출석 체크로 획득한 포인트를 사용하여 구매할 수 있는 <span class="arg required">역할</span>을 상점에서 제거합니다.'
+                    },
+                    {
+                        command: '/출석설정 지급 <span class="arg required">유저</span> <span class="arg required">포인트</span>',
+                        description: '<span class="arg required">유저</span>에게 <span class="arg required">포인트</span>를 지급합니다.<br>이 명령어를 사용하여 특정 유저에게 출석 포인트를 수동으로 지급할 수 있습니다.'
+                    },
+                    {
+                        command: '/역할구매 <span class="arg required">역할</span>',
+                        description: '출석 체크로 획득한 포인트를 사용하여 <span class="arg required">역할</span>을 구매합니다.<br>구매한 역할은 즉시 지급됩니다.'
+                    }
+                ],
+                setup: [
+                    "출석 체크 기능은 별도의 설정 없이 바로 사용할 수 있습니다.",
+                    "출석 체크를 통해 사용자는 매일 포인트를 획득하고, 이를 통해 역할을 구매할 수 있습니다.",
+                    "출석 체크는 하루에 한 번만 가능하며, 중복 출석은 인정되지 않습니다."
+                ]
+            },
+            "count-channel": {
+                title: "🔢 카운트 채널",
+                subtitle: "음성 채널을 이용해 서버의 통계를 보여주는 기능입니다.",
+                commands: [
+                    {
+                        command: '/카운트채널 추가 <span class="arg required">채널</span> <span class="arg required">내용</span>',
+                        description: '카운트 채널을 생성합니다.<br><span class="arg required">채널</span>은 카운트 채널이 생성될 음성 채널을 지정합니다.<br><span class="arg required">내용</span>은 카운트 채널의 내용을 설정합니다.'
+                    },
+                    {
+                        command: '/카운트채널 제거 <span class="arg required">채널</span>',
+                        description: '카운트 채널을 제거합니다.<br><span class="arg required">채널</span>은 제거할 카운트 채널의 음성 채널을 지정합니다.'
+                    }
+                ],
+                setup: [
+                    "카운트 채널은 음성 채널에서 사용되며, 서버의 통계를 실시간으로 보여줍니다.",
+                    "내용에는 {음성유저}{유저}{온라인유저}{오프라인유저}{봇}{카테고리}{채널}{이모지}{부스트레벨}{부스트수}{역할_ID} 등을 사용할 수 있습니다.<br>예를 들어, {음성유저}는 현재 음성 채널에 접속한 유저 수를 나타내며 '음성방 이용자: {음성유저}'와 같이 사용할 수 있습니다.",
+                    "카운트 채널은 서버의 활동도를 시각적으로 보여주며, 유저들이 서버의 상태를 쉽게 파악할 수 있도록 도와줍니다."
+                ]
+            },
+            ticket: {
+                title: "🎫 티켓 시스템",
+                subtitle: "티켓 관리 기능입니다.",
+                commands: [
+                    {
+                        command: '/티켓생성 <span class="arg required">제목</span> <span class="arg required">내용</span> <span class="arg required">카테고리</span> <span class="arg optional">이름</span> <span class="arg optional">색상</span>',
+                        description: '티켓 생성 버튼을 생성합니다.<br><span class="arg required">제목</span>은 티켓의 제목을 설정합니다.<br><span class="arg required">내용</span>은 티켓의 내용을 설정합니다.<br><span class="arg required">카테고리</span>는 티켓이 속할 카테고리를 지정합니다.<br><span class="arg optional">이름</span>은 티켓 생성 시 표시될 이름을 설정합니다. {사용자명}{사용자 아이디} 등을 사용할 수 있습니다.<br><span class="arg optional">색상</span>은 티켓의 색상을 설정합니다. (16진수 색상 코드 사용)'
+                    }
+                ],
+                setup: [
+                    "티켓 시스템은 서버 내에서 개인 문의 및 지원을 관리하는 기능입니다.",
+                    "티켓은 지정된 카테고리 내에서 생성되며, 유저는 티켓을 통해 관리자와 직접 소통할 수 있습니다.",
+                    "티켓 생성 시 제목, 내용, 카테고리, 이름, 색상 등을 설정할 수 있으며, 이를 통해 티켓의 가시성을 높일 수 있습니다."
+                ]
+            },
+            "another-feature": {
+                title: "🔧 기타 기능",
+                subtitle: "다양한 추가 기능 및 설정을 제공합니다.",
+                commands: [
+                    {
+                        command: '/랭크 <span class="arg required">항목</span>',
+                        description: '서버 내 랭크를 확인합니다.<br><span class="arg required">항목</span>은 확인하고자 하는 랭크 항목을 지정합니다. (예: 채팅, 출석 등)'
+                    },
+                    {
+                        command: '/공지 <span class="arg required">채널</span> <span class="arg optional">색상</span>',
+                        description: '명령어 사용시 보낼 공지를 입력하는 화면이 나타납니다.<br><span class="arg required">채널</span>은 공지를 보낼 채널을 지정합니다.<br><span class="arg optional">색상</span>은 공지의 색상을 설정합니다. (16진수 색상 코드 사용)'
+                    },
+                    {
+                        command: '/청소 <span class="arg required">수량</span>',
+                        description: '현재 채널의 메시지를 <span class="arg required">수량</span>만큼 삭제합니다.'
+                    },
+                    {
+                        command: '/금지리스트',
+                        description: '서버 내 금지된 행동 목록을 확인합니다.<br>금지된 행위는 봇이 자동으로 감지하고 처벌합니다.'
+                    },
+                    {
+                        command: '/서포트',
+                        description: '봇의 공식 지원 서버 링크와 도움말을 제공합니다.<br>봇 사용 중 문제가 발생하거나 추가적인 도움이 필요할 경우 이 명령어를 사용하세요.'
+                    }
+                ],
+                setup: [
+                    "기타 기능은 서버 관리 및 사용자 편의를 위한 다양한 추가 기능을 제공합니다."
+                ]
             }
+        };
+
+        function openModal(featureKey) {
+            const feature = features[featureKey];
+            if (!feature) return;
+
+            document.getElementById('modalTitle').textContent = feature.title;
+            document.getElementById('modalSubtitle').textContent = feature.subtitle;
+            
+            let modalContent = '';
+            
+            if (feature.commands && feature.commands.length > 0) {
+                modalContent += `
+                    <div class="command-section">
+                        <h3>명령어</h3>
+                        <table class="command-table">
+                            <thead>
+                                <tr>
+                                    <th>명령어</th>
+                                    <th>설명</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                feature.commands.forEach(cmd => {
+                    modalContent += `
+                        <tr>
+                            <td><div class="command-code">${cmd.command}</div></td>
+                            <td>${cmd.description}</td>
+                        </tr>
+                    `;
+                });
+                
+                modalContent += `
+                            </tbody>
+                        </table>
+                        <div class="legend">
+                            <strong>명령어 표기법:</strong>
+                            <span class="arg required">필수 항목</span>
+                            <span class="arg optional">선택 항목</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Setup section
+            if (feature.setup && feature.setup.length > 0) {
+                modalContent += `
+                    <div class="setup-section">
+                        <h3>설정 방법</h3>
+                        <div class="setup-steps">
+                            <ol>
+                `;
+                
+                feature.setup.forEach(step => {
+                    modalContent += `<li>${step}</li>`;
+                });
+                
+                modalContent += `
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('modalBody').innerHTML = modalContent;
+            document.getElementById('featureModal').classList.add('active');
         }
 
-        themeToggle.addEventListener('click', toggleTheme);
-        themeToggleMobile.addEventListener('click', toggleTheme);
-
-        // Check for saved theme
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        } else {
-            html.classList.remove('dark');
+        function closeModal() {
+            document.getElementById('featureModal').classList.remove('active');
         }
 
-        // Mobile Menu Logic
-        const menuToggle = document.getElementById('menu-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const menuOverlay = document.getElementById('menu-overlay');
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Feature card click handlers
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const featureKey = this.dataset.feature;
+                    openModal(featureKey);
+                });
+            });
 
-        function toggleMenu() {
-            sidebar.classList.toggle('-translate-x-full');
-            menuOverlay.classList.toggle('hidden');
-        }
-
-        menuToggle.addEventListener('click', toggleMenu);
-        menuOverlay.addEventListener('click', toggleMenu);
-
-        // Close menu when clicking a link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth < 1024) {
-                    toggleMenu();
+            // Modal close on outside click
+            document.getElementById('featureModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
                 }
             });
-        });
 
-        // Active Link Highlighting
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('sidebar-active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('sidebar-active');
+            // Close modal on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
                 }
             });
         });
