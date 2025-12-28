@@ -1,165 +1,498 @@
-<!doctype html>
-<html lang="ko" data-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>활성화 봇 — 모바일 친화적 웹 기술 쇼케이스</title>
-        <meta name="description" content="모바일 친화적이고 깔끔한 UI로 웹사이트 기술(PWA, 접근성, 성능, SEO)을 보여주는 데모 랜딩 페이지입니다.">
-        <link rel="canonical" href="/">
-        <meta name="theme-color" content="#0ea5e9">
-        <meta property="og:title" content="활성화 봇 — 웹 기술 쇼케이스">
-        <meta property="og:description" content="모바일 퍼스트 디자인과 PWA, 접근성, 성능 최적화 등을 소개합니다.">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="/">
-        <meta property="og:image" content="/assets/og-image.png">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="활성화 봇 — 웹 기술 쇼케이스">
-        <meta name="twitter:description" content="모바일 퍼스트 디자인과 PWA, 접근성, 성능 최적화 등을 소개합니다.">
-        <link rel="manifest" href="/manifest.json">
-        <link rel="preload" href="/assets/styles.css" as="style">
-        <link rel="stylesheet" href="/assets/styles.css">
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "활성화 봇",
-            "operatingSystem": "Web",
-            "applicationCategory": "CommunicationApplication",
-            "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}
-        }
-        </script>
-    </head>
-    <body>
-        <header class="header" role="banner">
-            <div class="container">
-                <a href="#" class="logo">활성화 봇</a>
-                <nav class="nav" role="navigation" aria-label="주요">
-                    <button id="menuToggle" aria-expanded="false" aria-controls="primaryNav">메뉴</button>
-                    <ul id="primaryNav" class="nav-list">
-                        <li><a href="#features">기능</a></li>
-                        <li><a href="#usage">사용법</a></li>
-                        <li><a href="#support">지원</a></li>
-                        <li><a href="#invite">초대</a></li>
-                        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </nav>
-                <button id="themeToggle" aria-label="테마 전환">🌓</button>
-            </div>
-        </header>
-
-        <main id="main" class="main" role="main">
-            <section class="section hero reveal">
-                <div class="container">
-                    <div class="hero-card">
-                        <h1>모바일 친화적 · 깔끔 · 현대적</h1>
-                        <p>웹사이트 기술(PWA, 접근성, 성능, SEO)을 보여주는 랜딩 페이지입니다.</p>
-                        <div class="actions">
-                            <a class="btn primary" href="#invite">봇 초대</a>
-                            <a class="btn" href="#">문서 보기</a>
-                        </div>
-                        <p class="note">이 페이지는 성능과 접근성을 고려한 모바일 퍼스트 구조를 사용합니다.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="about" class="section reveal">
-                <div class="container">
-                    <h2>왜 활성화 봇인가?</h2>
-                    <ul class="feature-list">
-                        <li>서버 활성도 상승: 출석·포인트·랭킹으로 참여 유도</li>
-                        <li>운영 자동화: 경고 누적·자동 처벌·자동 음성 채널</li>
-                        <li>질서 유지: 금지 행동/이모지, 신고 자동 처리</li>
-                        <li>관리 편의: 로그 채널, 공지/청소, 유저/역할 정보</li>
-                        <li>성장 지원: 초대 역할·이벤트·티켓·서버 셋업</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="tech" class="section reveal">
-                <div class="container">
-                    <h2>적용한 웹 기술</h2>
-                    <ul class="feature-list">
-                        <section id="usage" class="section reveal">
-                            <div class="container">
-                                <h2>사용 방법</h2>
-                                <ol>
-                                    <li><strong>봇 초대:</strong> 아래 초대 버튼으로 서버에 추가합니다.</li>
-                                    <li><strong>권한 확인:</strong> 채널/역할 관리, 타임아웃 등 필요한 권한을 부여합니다.</li>
-                                    <li><strong>초기 셋업:</strong> 로그/환영/처벌 채널 등을 설정합니다.</li>
-                                </ol>
-                                <div class="tabs" role="tablist" aria-label="명령어 예시">
-                                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-mod">운영</button>
-                                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-utility">유틸</button>
-                                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-engage">참여</button>
-                                </div>
-                                <div class="tab-panels">
-                                    <div id="tab-mod" class="tab-panel" role="tabpanel">
-            <pre class="code">/경고 부여 &lt;유저&gt; [사유]
-                        command: '/차단해제 <span class="arg required">유저_ID</span>',
-                        description: '차단된 <span class="arg required">유저_ID</span>의 차단을 해제합니다.'
-                    }
-                ],
-                                    </div>
-                                    <div id="tab-utility" class="tab-panel" role="tabpanel" hidden>
-            <pre class="code">/청소 &lt;수량&gt;
-                setup: [
-                    "차단 기능은 서버 관리자 또는 차단 권한이 있는 유저만 사용할 수 있습니다.",
-                    "차단된 유저는 서버에 다시 입장할 수 없습니다.",
-                    "차단 기록은 로그 채널에 자동으로 저장됩니다."
-                                    </div>
-                                    <div id="tab-engage" class="tab-panel" role="tabpanel" hidden>
-            <pre class="code">/출석
-                ]
-            }
-        };
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section id="support" class="section reveal">
-                            <div class="container">
-                                <h2>지원 및 링크</h2>
-                                <p>문제가 있거나 도움이 필요하면 아래 링크를 이용하세요.</p>
-                                <div class="actions">
-                                    <a class="btn" href="#">서포트 서버</a>
-                                    <a class="btn" href="#">문서</a>
-                                    <a class="btn" href="#">개인정보 처리방침</a>
-                                    <a class="btn" href="#">이용 약관</a>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section id="invite" class="section reveal">
-                            <div class="container">
-                                <h2>지금 바로 활성화 봇 초대</h2>
-                                <p>서버 운영을 자동화하고 참여를 높여보세요.</p>
-                                <div class="actions">
-                                    <a class="btn primary" href="#">봇 초대</a>
-                                    <a class="btn" href="#">서포트 서버</a>
-                                </div>
-                            </div>
-                        </section>
-
-                </section>
-                </main>
-
-                <footer class="footer" role="contentinfo">
-                    <div class="container">
-                        <div>&copy; 2025 디스코드 활성화 봇 · Tanat05</div>
-                        <div>
-                            <a href="#">서포트 서버</a> ·
-                            <a href="#">이용 약관</a> ·
-                            <a href="#">개인정보 처리방침</a>
-                        </div>
-                    </div>
-                </footer>
-
-                <script src="/assets/script.js" defer></script>
-                </body>
-                </html>
+<!DOCTYPE html>
+<html lang="ko" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activation Bot - 스마트한 디스코드 관리의 시작</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#A0E8FF',
+                        'primary-dark': '#7DD3F7',
+                        dark: {
+                            bg: '#0F172A',
+                            sidebar: '#1E293B',
+                            card: '#1E293B',
+                            text: '#F8FAFC'
+                        }
                     },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-active {
+            background-color: rgba(160, 232, 255, 0.1);
+            border-right: 4px solid #A0E8FF;
+            color: #0EA5E9;
+        }
+        .dark .sidebar-active {
+            background-color: rgba(160, 232, 255, 0.05);
+            color: #A0E8FF;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+        pre {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .dark pre {
+            background-color: #334155;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-dark-bg text-slate-900 dark:text-dark-text transition-colors duration-300">
 
-                    {
+    <!-- Mobile Header -->
+    <header class="lg:hidden flex items-center justify-between p-4 border-b dark:border-slate-800 sticky top-0 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-md z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <i data-lucide="bot" class="text-slate-900 w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-xl tracking-tight">Activation</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button id="theme-toggle-mobile" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                <i data-lucide="sun" class="hidden dark:block w-5 h-5"></i>
+                <i data-lucide="moon" class="block dark:hidden w-5 h-5"></i>
+            </button>
+            <button id="menu-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
 
-                        command: '/역할구매 <span class="arg required">역할</span>',
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-slate-50 dark:bg-dark-sidebar border-r dark:border-slate-800 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen overflow-y-auto">
+            <div class="p-6 hidden lg:flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                    <i data-lucide="bot" class="text-slate-900 w-6 h-6"></i>
+                </div>
+                <span class="font-bold text-2xl tracking-tight">Activation</span>
+            </div>
+
+            <nav class="px-4 space-y-8 pb-10">
+                <div>
+                    <h3 class="px-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">시작하기</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#intro" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="home" class="w-4 h-4"></i>소개</a></li>
+                        <li><a href="#setup" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="rocket" class="w-4 h-4"></i>초대 및 설정</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="px-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">주요 기능</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#admin" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="shield" class="w-4 h-4"></i>관리자 도구</a></li>
+                        <li><a href="#economy" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="coins" class="w-4 h-4"></i>경제 및 활동</a></li>
+                        <li><a href="#moderation" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="hammer" class="w-4 h-4"></i>보안 및 제재</a></li>
+                        <li><a href="#utility" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="wrench" class="w-4 h-4"></i>유틸리티</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="px-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">기타</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#support" class="nav-link flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"><i data-lucide="help-circle" class="w-4 h-4"></i>고객 지원</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t dark:border-slate-800 bg-slate-50 dark:bg-dark-sidebar hidden lg:block">
+                <button id="theme-toggle" class="flex items-center justify-center gap-2 w-full py-2 rounded-lg border dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i data-lucide="sun" class="hidden dark:block w-4 h-4"></i>
+                    <i data-lucide="moon" class="block dark:hidden w-4 h-4"></i>
+                    <span class="text-sm font-medium">테마 변경</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 lg:ml-0 overflow-x-hidden">
+            <div class="max-w-4xl mx-auto px-6 py-12 lg:px-12 lg:py-20">
+                
+                <!-- Intro Section -->
+                <section id="intro" class="mb-24">
+                    <div class="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide text-sky-600 uppercase bg-sky-100 rounded-full dark:bg-sky-900/30 dark:text-sky-400">
+                        Activation Bot
+                    </div>
+                    <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">
+                        더욱 강력하고 스마트한<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">디스코드 서버 관리</span>
+                    </h1>
+                    <p class="text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
+                        Activation은 서버 관리, 경제 시스템, 보안 기능을 하나로 통합한 올인원 디스코드 봇입니다. 
+                        복잡한 설정 없이도 서버를 활기차고 안전하게 유지할 수 있습니다.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="px-8 py-4 bg-primary hover:bg-primary-dark text-slate-900 font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-primary/25 flex items-center gap-2">
+                            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+                            봇 초대하기
+                        </a>
+                        <a href="#setup" class="px-8 py-4 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold rounded-xl transition-all flex items-center gap-2">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            사용 가이드
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Setup Section -->
+                <section id="setup" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="rocket" class="text-primary w-8 h-8"></i>
+                        초대 및 설정
+                    </h2>
+                    <div class="grid gap-6">
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <h3 class="text-xl font-bold mb-4">1. 봇 초대하기</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">위의 '봇 초대하기' 버튼을 클릭하여 관리 권한이 있는 서버에 Activation을 추가하세요.</p>
+                            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 flex gap-3">
+                                <i data-lucide="info" class="text-blue-500 shrink-0"></i>
+                                <p class="text-sm text-blue-700 dark:text-blue-300">원활한 기능을 위해 '관리자' 권한을 부여하는 것을 권장합니다.</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <h3 class="text-xl font-bold mb-4">2. 초기 설정</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">서버에 초대 후 <code>/서버설정</code> 명령어를 통해 로그 채널 및 기본 설정을 완료하세요.</p>
+                            <pre><code>/서버설정 로그채널: #로그-채널</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Admin Section -->
+                <section id="admin" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="shield" class="text-primary w-8 h-8"></i>
+                        관리자 도구
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="group p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800 hover:border-primary transition-colors">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-xl font-bold">서버 관리 명령어</h3>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs font-medium">Admin Only</span>
+                            </div>
+                            <ul class="space-y-4">
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/서버설정</code>
+                                        <span class="text-xs text-slate-400">로그, 환영/퇴장 채널 설정</span>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">서버의 전반적인 기능을 설정합니다. 로그 채널을 설정하면 모든 활동이 기록됩니다.</span>
+                                </li>
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/청소 [개수]</code>
+                                        <span class="text-xs text-slate-400">메시지 대량 삭제</span>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">채널의 메시지를 지정한 개수만큼 삭제합니다. (최대 100개)</span>
+                                </li>
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/임베드</code>
+                                        <span class="text-xs text-slate-400">커스텀 메시지 생성</span>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">깔끔한 임베드 메시지를 생성하여 공지사항 등을 작성합니다.</span>
+                                </li>
+                                <li class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <code class="text-sky-500 font-bold">/이모지차단</code>
+                                        <span class="text-xs text-slate-400">특정 이모지 사용 제한</span>
+                                    </div>
+                                    <span class="text-slate-600 dark:text-slate-400">서버에서 사용을 금지할 이모지를 설정합니다.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Economy Section -->
+                <section id="economy" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="coins" class="text-primary w-8 h-8"></i>
+                        경제 및 활동
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="calendar-check" class="text-amber-600 dark:text-amber-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">출석체크</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">매일 <code>/출석</code> 명령어로 포인트를 획득하세요. 연속 출석 시 추가 보상이 지급됩니다.</p>
+                            <div class="space-y-2">
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/출석 - 일일 출석</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/내정보 - 포인트 및 정보 확인</code>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="trending-up" class="text-emerald-600 dark:text-emerald-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">레벨 시스템</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">채팅 활동을 통해 경험치를 얻고 레벨업하세요. 레벨에 따른 역할 자동 부여도 가능합니다.</p>
+                            <div class="space-y-2">
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/레벨 - 현재 레벨 확인</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/랭킹 - 서버 레벨 순위</code>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="shopping-bag" class="text-purple-600 dark:text-purple-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">역할 상점</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">모은 포인트로 특별한 역할을 구매할 수 있습니다. 관리자가 상점 품목을 직접 설정합니다.</p>
+                            <div class="space-y-2">
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/상점 - 판매 중인 역할 목록</code>
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/구매 [역할이름] - 역할 구매</code>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-50 dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                            <div class="w-12 h-12 bg-sky-100 dark:bg-sky-900/30 rounded-xl flex items-center justify-center mb-4">
+                                <i data-lucide="gift" class="text-sky-600 dark:text-sky-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">이벤트</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mb-4">서버에서 진행되는 다양한 이벤트에 참여하고 보상을 받으세요.</p>
+                            <div class="space-y-2">
+                                <code class="text-xs bg-white dark:bg-slate-800 p-2 rounded block">/이벤트 목록 - 진행 중인 이벤트</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Moderation Section -->
+                <section id="moderation" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="hammer" class="text-primary w-8 h-8"></i>
+                        보안 및 제재
+                    </h2>
+                    <div class="grid gap-6">
+                        <div class="bg-slate-900 text-white p-8 rounded-3xl overflow-hidden relative">
+                            <div class="relative z-10">
+                                <h3 class="text-2xl font-bold mb-4">자동 관리 시스템</h3>
+                                <p class="text-slate-400 mb-8 max-w-md">욕설, 도배, 유해 링크 등을 실시간으로 감지하고 자동으로 제재합니다. 서버의 평화를 Activation에게 맡기세요.</p>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>욕설 필터링</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>도배 방지</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>링크 차단</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="check-circle-2" class="text-primary w-5 h-5"></i>
+                                        <span>경고 시스템</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i data-lucide="shield-check" class="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 rotate-12"></i>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                                <h3 class="text-lg font-bold mb-4">수동 제재 명령어</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex flex-col">
+                                        <code class="text-red-400">/경고 [유저] [사유]</code>
+                                        <span class="text-sm text-slate-500">유저에게 경고를 부여합니다.</span>
+                                    </li>
+                                    <li class="flex flex-col">
+                                        <code class="text-red-400">/차단 [유저] [사유]</code>
+                                        <span class="text-sm text-slate-500">유저를 서버에서 영구 차단합니다.</span>
+                                    </li>
+                                    <li class="flex flex-col">
+                                        <code class="text-red-400">/추방 [유저] [사유]</code>
+                                        <span class="text-sm text-slate-500">유저를 서버에서 추방합니다.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-6 bg-white dark:bg-dark-card rounded-2xl border dark:border-slate-800">
+                                <h3 class="text-lg font-bold mb-4">처벌 기록 확인</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex flex-col">
+                                        <code class="text-sky-400">/경고확인 [유저]</code>
+                                        <span class="text-sm text-slate-500">특정 유저의 경고 내역을 확인합니다.</span>
+                                    </li>
+                                    <li class="flex flex-col">
+                                        <code class="text-sky-400">/경고삭제 [유저] [번호]</code>
+                                        <span class="text-sm text-slate-500">잘못 부여된 경고를 삭제합니다.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Utility Section -->
+                <section id="utility" class="mb-24 scroll-mt-20">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="wrench" class="text-primary w-8 h-8"></i>
+                        유틸리티
+                    </h2>
+                    <div class="grid gap-6">
+                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
+                            <div class="mt-1 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
+                                <i data-lucide="ticket" class="text-blue-600 dark:text-blue-400 w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-1">티켓 시스템</h4>
+                                <p class="text-slate-600 dark:text-slate-400 mb-3">1:1 문의 채널을 생성하여 체계적인 고객 지원이 가능합니다. 관리자만 접근 가능한 비공개 채널이 생성됩니다.</p>
+                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/티켓설정 - 티켓 시스템 활성화</code>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
+                            <div class="mt-1 p-3 bg-pink-100 dark:bg-pink-900/30 rounded-xl">
+                                <i data-lucide="hash" class="text-pink-600 dark:text-pink-400 w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-1">숫자 세기</h4>
+                                <p class="text-slate-600 dark:text-slate-400 mb-3">서버 멤버들과 함께 숫자를 세며 소통하는 미니게임을 즐기세요. 숫자가 틀리면 처음부터 다시 시작해야 합니다!</p>
+                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/숫자세기설정 - 채널 지정</code>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
+                            <div class="mt-1 p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
+                                <i data-lucide="alert-triangle" class="text-orange-600 dark:text-orange-400 w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-1">신고 시스템</h4>
+                                <p class="text-slate-600 dark:text-slate-400 mb-3">유저의 부적절한 행동을 관리자에게 익명으로 신고할 수 있습니다. 신고 내용은 지정된 로그 채널로 전송됩니다.</p>
+                                <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/신고 [유저] [내용]</code>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-dark-card border dark:border-slate-800 hover:shadow-md transition-shadow">
+                            <div class="mt-1 p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl">
+                                <i data-lucide="info" class="text-indigo-600 dark:text-indigo-400 w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-1">기타 유틸리티</h4>
+                                <p class="text-slate-600 dark:text-slate-400 mb-3">서버 정보 확인, 유저 정보 조회 등 다양한 편의 기능을 제공합니다.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/서버정보</code>
+                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/유저정보</code>
+                                    <code class="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">/핑</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Support Section -->
+                <section id="support" class="mb-24 scroll-mt-20">
+                    <div class="p-10 bg-gradient-to-br from-sky-400 to-blue-600 rounded-3xl text-white text-center">
+                        <h2 class="text-3xl font-bold mb-4">도움이 필요하신가요?</h2>
+                        <p class="mb-8 opacity-90">Activation 사용 중 궁금한 점이나 버그 제보는 공식 지원 서버를 이용해 주세요.</p>
+                        <div class="flex justify-center gap-4">
+                            <a href="#" class="px-6 py-3 bg-white text-blue-600 font-bold rounded-xl hover:bg-opacity-90 transition-all">지원 서버 입장</a>
+                            <a href="#" class="px-6 py-3 bg-blue-700 text-white font-bold rounded-xl hover:bg-blue-800 transition-all">문의하기</a>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="pt-12 border-t dark:border-slate-800 text-center text-slate-500 dark:text-slate-400 text-sm">
+                    <p>© 2025 Activation Bot. All rights reserved.</p>
+                    <p class="mt-2">Designed with ❤️ for Discord Communities</p>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden"></div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+
+        function toggleTheme() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
+
+        // Check for saved theme
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('-translate-x-full');
+            menuOverlay.classList.toggle('hidden');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Active Link Highlighting
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('sidebar-active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('sidebar-active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
