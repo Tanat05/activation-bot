@@ -25,7 +25,7 @@
     <meta name="keywords" content="디스코드, 봇, 활성화, Discord, Bot, 경고, 로그, 관리, 서버">
     <meta name="author" content="타나트">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#5865f2">
+    <meta name="theme-color" content="#A0E8FF">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://tanat05.github.io/activation-bot/">
@@ -44,8 +44,8 @@
         }
         
         :root {
-            --primary-color: #5865f2;
-            --primary-hover: #4752c4;
+            --primary-color: #A0E8FF;
+            --primary-hover: #80D8FF;
             --secondary-color: #4f545c;
             --background-color: #ffffff;
             --surface-color: #f8f9fa;
@@ -60,6 +60,18 @@
             --border-radius-large: 16px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        [data-theme="dark"] {
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-muted: #808080;
+            --border-color: #333333;
+            --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
         
         body {
             font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -68,6 +80,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         /* Container */
@@ -80,11 +93,15 @@
         /* Header */
         .header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-            color: white;
+            color: #2c2f33;
             padding: 80px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+
+        [data-theme="dark"] .header {
+            color: #121212;
         }
         
         .header::before {
@@ -94,7 +111,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.3;
         }
         
@@ -107,7 +124,7 @@
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 16px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
         .header p {
@@ -115,6 +132,35 @@
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+            color: inherit;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
         }
         
         /* Main Content */
@@ -296,7 +342,7 @@
         
         .command-table th {
             background: var(--primary-color);
-            color: white;
+            color: #2c2f33;
             padding: 16px;
             text-align: left;
             font-weight: 600;
@@ -321,17 +367,22 @@
             border: 1px solid var(--border-color);
             word-break: break-all;
             line-height: 1.6;
+            color: var(--text-primary);
         }
         
         /* Command Card Layout for Mobile */
-        .command-card {
+        .command-mobile-list {
             display: none;
+        }
+
+        .command-card {
             background: var(--surface-color);
             border-radius: var(--border-radius);
             margin-bottom: 16px;
             padding: 20px;
             box-shadow: var(--shadow-light);
             border: 1px solid var(--border-color);
+            display: block;
         }
         
         .command-card-header {
@@ -341,7 +392,7 @@
         .command-card-title {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--primary-hover);
             margin-bottom: 8px;
         }
         
@@ -355,6 +406,7 @@
             margin-bottom: 12px;
             word-break: break-all;
             line-height: 1.6;
+            color: var(--text-primary);
         }
         
         .command-card-description {
@@ -374,13 +426,13 @@
         }
         
         .arg.required {
-            background: #5865F2;
-            color: white;
+            background: var(--primary-color);
+            color: #2c2f33;
         }
         
         .arg.optional {
-            background: #E0E3FF;
-            color: black;
+            background: var(--border-color);
+            color: var(--text-primary);
         }
         
         .legend {
@@ -389,6 +441,7 @@
             background: var(--surface-color);
             border-radius: var(--border-radius);
             font-size: 0.9rem;
+            border: 1px solid var(--border-color);
         }
         
         /* Setup Instructions */
@@ -483,7 +536,11 @@
             }
             
             .command-table {
-                font-size: 0.9rem;
+                display: none;
+            }
+
+            .command-mobile-list {
+                display: block;
             }
             
             .command-table th,
@@ -519,6 +576,10 @@
 <body>
     <!-- Header -->
     <header class="header">
+        <button class="theme-toggle" id="themeToggle">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">다크 모드</span>
+        </button>
         <div class="container">
             <div class="header-content">
                 <h1>디스코드 활성화 봇</h1>
@@ -604,6 +665,24 @@
                     <p class="feature-description">개인 문의 및 지원 티켓 관리</p>
                 </a>
 
+                <a href="#" class="feature-card" data-feature="auto-voice">
+                    <span class="feature-icon">🔊</span>
+                    <h3 class="feature-title">자동 음성 채널</h3>
+                    <p class="feature-description">유저가 접속하면 자동으로 생성되는 음성 채널</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="invite-role">
+                    <span class="feature-icon">🔗</span>
+                    <h3 class="feature-title">초대 역할</h3>
+                    <p class="feature-description">특정 초대 코드로 가입 시 역할 자동 지급</p>
+                </a>
+
+                <a href="#" class="feature-card" data-feature="moderation">
+                    <span class="feature-icon">🛡️</span>
+                    <h3 class="feature-title">관리 기능</h3>
+                    <p class="feature-description">서버 보안 및 유저 관리를 위한 핵심 도구</p>
+                </a>
+
                 <a href="#" class="feature-card" data-feature="another-feature">
                     <span class="feature-icon">🔧</span>
                     <h3 class="feature-title">기타 기능</h3>
@@ -660,6 +739,10 @@
                     {
                         command: '/경고 자동차감감해제 <span class="arg required">역할</span>',
                         description: '<span class="arg required">역할</span>에 설정된 경고 자동제거 기능을 해제합니다.'
+                    },
+                    {
+                        command: '/자동처벌 <span class="arg required">횟수</span> <span class="arg required">처벌</span>',
+                        description: '경고가 <span class="arg required">횟수</span>만큼 누적되었을 때 자동으로 적용할 <span class="arg required">처벌</span>을 설정합니다.'
                     }
                 ],
                 setup: [
@@ -935,6 +1018,57 @@
                     "티켓 생성 시 제목, 내용, 카테고리, 이름, 색상 등을 설정할 수 있으며, 이를 통해 티켓의 가시성을 높일 수 있습니다."
                 ]
             },
+            "auto-voice": {
+                title: "🔊 자동 음성 채널",
+                subtitle: "유저가 특정 채널에 접속하면 자동으로 개인 음성 채널을 생성해주는 기능입니다.",
+                commands: [
+                    {
+                        command: '/자동음성채널 추가 <span class="arg required">채널</span> <span class="arg optional">양식</span> <span class="arg optional">권한</span> <span class="arg optional">최대채널</span>',
+                        description: '자동 음성 채널 생성을 위한 대기실 채널을 설정합니다.<br><span class="arg optional">양식</span>: 생성될 채널 이름 양식 (예: {user}님의 방)<br><span class="arg optional">권한</span>: 채널 소유자에게 관리 권한 부여 여부<br><span class="arg optional">최대채널</span>: 생성 가능한 최대 채널 수'
+                    }
+                ],
+                setup: [
+                    "대기실 채널에 유저가 입장하면 자동으로 새로운 음성 채널이 생성되고 해당 유저를 이동시킵니다.",
+                    "방에 아무도 없게 되면 채널은 자동으로 삭제됩니다.",
+                    "유저는 자신의 방 이름을 바꾸거나 인원 제한을 설정하는 등 관리 권한을 가질 수 있습니다."
+                ]
+            },
+            "invite-role": {
+                title: "🔗 초대 역할",
+                subtitle: "특정 초대 코드를 통해 서버에 들어온 유저에게 자동으로 역할을 지급합니다.",
+                commands: [
+                    {
+                        command: '/초대역할 추가 <span class="arg required">역할</span> <span class="arg required">초대코드</span>',
+                        description: '<span class="arg required">초대코드</span>를 통해 가입한 유저에게 <span class="arg required">역할</span>을 자동으로 지급하도록 설정합니다.'
+                    }
+                ],
+                setup: [
+                    "서버의 초대 링크별로 다른 역할을 부여할 수 있어 유입 경로 파악 및 관리에 용이합니다.",
+                    "이미 생성된 초대 코드를 입력해야 정상적으로 작동합니다."
+                ]
+            },
+            moderation: {
+                title: "🛡️ 관리 기능",
+                subtitle: "서버의 질서를 유지하기 위한 기본적인 관리 도구입니다.",
+                commands: [
+                    {
+                        command: '/차단 <span class="arg required">유저</span> <span class="arg optional">사유</span>',
+                        description: '지정한 <span class="arg required">유저</span>를 서버에서 영구히 차단합니다.'
+                    },
+                    {
+                        command: '/차단해제 <span class="arg required">유저ID</span>',
+                        description: '차단된 유저의 ID를 입력하여 차단을 해제합니다.'
+                    },
+                    {
+                        command: '/청소 <span class="arg required">수량</span>',
+                        description: '현재 채널의 메시지를 지정한 <span class="arg required">수량</span>만큼 일괄 삭제합니다.'
+                    }
+                ],
+                setup: [
+                    "관리 권한이 있는 유저만 사용 가능합니다.",
+                    "모든 관리 활동은 설정된 로그 채널에 기록됩니다."
+                ]
+            },
             "another-feature": {
                 title: "🔧 기타 기능",
                 subtitle: "다양한 추가 기능 및 설정을 제공합니다.",
@@ -976,6 +1110,7 @@
             let modalContent = '';
             
             if (feature.commands && feature.commands.length > 0) {
+                // Desktop Table
                 modalContent += `
                     <div class="command-section">
                         <h3>명령어</h3>
@@ -1001,6 +1136,25 @@
                 modalContent += `
                             </tbody>
                         </table>
+
+                        <!-- Mobile Cards -->
+                        <div class="command-mobile-list">
+                `;
+
+                feature.commands.forEach(cmd => {
+                    modalContent += `
+                        <div class="command-card">
+                            <div class="command-card-title">명령어</div>
+                            <div class="command-card-code">${cmd.command}</div>
+                            <div class="command-card-title">설명</div>
+                            <div class="command-card-description">${cmd.description}</div>
+                        </div>
+                    `;
+                });
+
+                modalContent += `
+                        </div>
+
                         <div class="legend">
                             <strong>명령어 표기법:</strong>
                             <span class="arg required">필수 항목</span>
@@ -1038,8 +1192,42 @@
             document.getElementById('featureModal').classList.remove('active');
         }
 
+        // Theme Toggle Logic
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeUI(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeUI(newTheme);
+        }
+
+        function updateThemeUI(theme) {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            if (theme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = '라이트 모드';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = '다크 모드';
+            }
+        }
+
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+
+            // Theme toggle click handler
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
             // Feature card click handlers
             document.querySelectorAll('.feature-card').forEach(card => {
                 card.addEventListener('click', function(e) {
